@@ -53,7 +53,7 @@ Cada item do desafio e o lugar onde ele está:
 
 Documentos de apoio:
 
-- [`postman/`](postman/): workspace do Postman versionado no repositório, com a coleção dos testes de API em `postman/collections/`. Abra a pasta do projeto no Postman (workspace local com Git) para usá-la.
+- [`postman/`](postman/): workspace do Postman versionado no repositório. A coleção dos testes de API (CT-13 a CT-19, 26 requisições com testes) está em [`postman/Verzel Store API.postman_collection.json`](<postman/Verzel Store API.postman_collection.json>). Para usá-la, importe o arquivo no Postman (File > Import) ou rode pelo terminal: `npx newman run "postman/Verzel Store API.postman_collection.json"`. Os testes afirmam o resultado esperado pela documentação, então 6 asserções falham de propósito por causa do BUG-001 e do BUG-002.
 - [`docs/ambiguidades.md`](docs/ambiguidades.md): ambiguidades da documentação e a interpretação adotada para cada uma.
 - [`docs/estrategia-de-testes.md`](docs/estrategia-de-testes.md): técnicas, escopo, priorização e critérios de pronto.
 
