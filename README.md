@@ -53,9 +53,9 @@ Cada item do desafio e o lugar onde ele está:
 
 Documentos de apoio:
 
+- [`postman/`](postman/): workspace do Postman versionado no repositório, com a coleção dos testes de API em `postman/collections/`. Abra a pasta do projeto no Postman (workspace local com Git) para usá-la.
 - [`docs/ambiguidades.md`](docs/ambiguidades.md): ambiguidades da documentação e a interpretação adotada para cada uma.
 - [`docs/estrategia-de-testes.md`](docs/estrategia-de-testes.md): técnicas, escopo, priorização e critérios de pronto.
-- [`docs/enunciado-teste-tecnico-qa-junior.pdf`](docs/enunciado-teste-tecnico-qa-junior.pdf): enunciado original do desafio.
 
 ## Estrutura do repositório
 
@@ -64,7 +64,6 @@ Documentos de apoio:
 ├── README.md
 ├── CHANGELOG.md                versionamento (Keep a Changelog + SemVer)
 ├── docs/
-│   ├── enunciado-teste-tecnico-qa-junior.pdf
 │   ├── ambiguidades.md
 │   ├── estrategia-de-testes.md
 │   ├── matriz-rastreabilidade.md
@@ -73,6 +72,7 @@ Documentos de apoio:
 ├── execucao/
 │   └── resultados.md           resultado de cada cenário e sessões exploratórias
 ├── bugs/                       um arquivo por bug (BUG-001.md ...), resumo e modelo
+├── postman/                    coleção e ambiente do Postman (testes de API), versionados
 ├── evidencias/                 uma imagem de evidência por cenário (capturas da UI e requisição com resposta da API), nomeadas por ID (CT-06_...)
 └── automacao/                  Playwright + TypeScript
     ├── playwright.config.ts
