@@ -1,0 +1,1084 @@
+{
+  "info": {
+    "name": "Verzel Store API",
+    "description": "Testes de API da entrega VZS-142 (cupom e frete grátis). Cenários CT-13 a CT-19. Os testes verificam o resultado esperado pela documentação: os que falham (BUG-001 e BUG-002) reproduzem os bugs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base",
+      "value": "https://verzel-store.qa-test-verzel-store.workers.dev/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "CT-13 Produtos",
+      "item": [
+        {
+          "name": "GET produtos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"lista com 8 produtos (P001 a P008)\", () => { const j = pm.response.json(); pm.expect(j).to.have.lengthOf(8); pm.expect(j.map(p => p.id)).to.eql([\"P001\",\"P002\",\"P003\",\"P004\",\"P005\",\"P006\",\"P007\",\"P008\"]); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/produtos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "produtos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET produtos/P001",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Camiseta Essencial, preco 59.9\", () => { const j = pm.response.json(); pm.expect(j.nome).to.eql(\"Camiseta Essencial\"); pm.expect(j.preco).to.eql(59.9); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/produtos/P001",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "produtos",
+                "P001"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET produtos/P999",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"erro.codigo PRODUTO_NAO_ENCONTRADO\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"PRODUTO_NAO_ENCONTRADO\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/produtos/P999",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "produtos",
+                "P999"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CT-14 Calcular com BEMVINDO10",
+      "item": [
+        {
+          "name": "POST calcular BEMVINDO10 (exemplo da documentação)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"valores do exemplo da documentacao\", () => { const j = pm.response.json(); pm.expect(j.subtotal).to.eql(239.7); pm.expect(j.desconto).to.eql(23.97); pm.expect(j.frete).to.eql(0); pm.expect(j.freteGratis).to.eql(true); pm.expect(j.valorFaltanteFreteGratis).to.eql(0); pm.expect(j.total).to.eql(215.73); pm.expect(j.cupom.aplicado).to.eql(true); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P002\",\n      \"quantidade\": 1\n    },\n    {\n      \"produtoId\": \"P004\",\n      \"quantidade\": 2\n    }\n  ],\n  \"cupom\": \"BEMVINDO10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CT-15 Cupom inválido ou expirado",
+      "item": [
+        {
+          "name": "POST calcular cupom INEXISTENTE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"sem desconto e cupom nao aplicado\", () => { const j = pm.response.json(); pm.expect(j.desconto).to.eql(0); pm.expect(j.cupom.aplicado).to.eql(false); pm.expect(j.cupom.mensagem).to.eql(\"Cupom inválido.\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P005\",\n      \"quantidade\": 2\n    }\n  ],\n  \"cupom\": \"INEXISTENTE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST calcular cupom VERAO2026",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"sem desconto e cupom nao aplicado\", () => { const j = pm.response.json(); pm.expect(j.desconto).to.eql(0); pm.expect(j.cupom.aplicado).to.eql(false); pm.expect(j.cupom.mensagem).to.eql(\"Cupom expirado.\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P005\",\n      \"quantidade\": 2\n    }\n  ],\n  \"cupom\": \"VERAO2026\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CT-16 Limite do frete",
+      "item": [
+        {
+          "name": "POST calcular R$ 199,90 (1x P004 + 3x P008)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"frete 19.9, freteGratis false, total 219.8\", () => { const j = pm.response.json(); pm.expect(j.frete).to.eql(19.9); pm.expect(j.freteGratis).to.eql(false); pm.expect(j.valorFaltanteFreteGratis).to.eql(0.1); pm.expect(j.total).to.eql(219.8); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P004\",\n      \"quantidade\": 1\n    },\n    {\n      \"produtoId\": \"P008\",\n      \"quantidade\": 3\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST calcular R$ 200,00 (4x P008)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"frete 0, freteGratis true, total 200 (BUG-001)\", () => { const j = pm.response.json(); pm.expect(j.frete).to.eql(0); pm.expect(j.freteGratis).to.eql(true); pm.expect(j.valorFaltanteFreteGratis).to.eql(0); pm.expect(j.total).to.eql(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P008\",\n      \"quantidade\": 4\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST calcular R$ 200,00 com BEMVINDO10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"frete 0, freteGratis true, total 180 (BUG-001)\", () => { const j = pm.response.json(); pm.expect(j.frete).to.eql(0); pm.expect(j.freteGratis).to.eql(true); pm.expect(j.valorFaltanteFreteGratis).to.eql(0); pm.expect(j.total).to.eql(180); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P008\",\n      \"quantidade\": 4\n    }\n  ],\n  \"cupom\": \"BEMVINDO10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST calcular R$ 229,90 (1x P007)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"frete 0, freteGratis true, total 229.9\", () => { const j = pm.response.json(); pm.expect(j.frete).to.eql(0); pm.expect(j.freteGratis).to.eql(true); pm.expect(j.valorFaltanteFreteGratis).to.eql(0); pm.expect(j.total).to.eql(229.9); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P007\",\n      \"quantidade\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CT-17 Erros de validação e de protocolo",
+      "item": [
+        {
+          "name": "1 POST calcular 6x P001",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo QUANTIDADE_MAXIMA_EXCEDIDA\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"QUANTIDADE_MAXIMA_EXCEDIDA\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P001\",\n      \"quantidade\": 6\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "2 POST pedidos 6x P001",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo QUANTIDADE_MAXIMA_EXCEDIDA\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"QUANTIDADE_MAXIMA_EXCEDIDA\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/pedidos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "pedidos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"nome\": \"Maria Silva\",\n    \"email\": \"maria@exemplo.com\",\n    \"cep\": \"01310-100\"\n  },\n  \"itens\": [\n    {\n      \"produtoId\": \"P001\",\n      \"quantidade\": 6\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "3 POST calcular quantidade 0",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo QUANTIDADE_INVALIDA\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"QUANTIDADE_INVALIDA\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P001\",\n      \"quantidade\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "4 POST calcular quantidade 1.5",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo QUANTIDADE_INVALIDA\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"QUANTIDADE_INVALIDA\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"itens\": [ { \"produtoId\": \"P001\", \"quantidade\": 1.5 } ] }"
+            }
+          }
+        },
+        {
+          "name": "5 POST calcular itens vazio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo ITENS_OBRIGATORIOS\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"ITENS_OBRIGATORIOS\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "6 POST calcular P001 repetido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo ITEM_DUPLICADO\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"ITEM_DUPLICADO\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P001\",\n      \"quantidade\": 1\n    },\n    {\n      \"produtoId\": \"P001\",\n      \"quantidade\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "7 POST calcular produto P999",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo PRODUTO_NAO_ENCONTRADO\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"PRODUTO_NAO_ENCONTRADO\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itens\": [\n    {\n      \"produtoId\": \"P999\",\n      \"quantidade\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "8 POST calcular corpo que nao e JSON",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"erro.codigo JSON_INVALIDO\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"JSON_INVALIDO\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "nao e json"
+            }
+          }
+        },
+        {
+          "name": "9 GET calcular",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 405\", () => pm.response.to.have.status(405));",
+                  "pm.test(\"erro.codigo METODO_NAO_PERMITIDO\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"METODO_NAO_PERMITIDO\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/carrinho/calcular",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "carrinho",
+                "calcular"
+              ]
+            }
+          }
+        },
+        {
+          "name": "10 GET rota inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"erro.codigo ROTA_NAO_ENCONTRADA\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"ROTA_NAO_ENCONTRADA\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/rota-inexistente",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "rota-inexistente"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CT-18 Pedidos",
+      "item": [
+        {
+          "name": "POST pedidos com BEMVINDO10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"numero VZ-000000, valores e CEP sem hifen\", () => { const j = pm.response.json(); pm.expect(j.numero).to.match(/^VZ-\\d{6}$/); pm.expect(j.subtotal).to.eql(100); pm.expect(j.desconto).to.eql(10); pm.expect(j.frete).to.eql(19.9); pm.expect(j.total).to.eql(109.9); pm.expect(j.cliente.cep).to.eql(\"01310100\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/pedidos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "pedidos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"nome\": \"Maria Silva\",\n    \"email\": \"maria@exemplo.com\",\n    \"cep\": \"01310-100\"\n  },\n  \"itens\": [\n    {\n      \"produtoId\": \"P005\",\n      \"quantidade\": 1\n    }\n  ],\n  \"cupom\": \"BEMVINDO10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST pedidos com cupom INEXISTENTE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo CUPOM_INVALIDO\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"CUPOM_INVALIDO\"));",
+                  "pm.test(\"erro.campo cupom\", () => pm.expect(pm.response.json().erro.campo).to.eql(\"cupom\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/pedidos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "pedidos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"nome\": \"Maria Silva\",\n    \"email\": \"maria@exemplo.com\",\n    \"cep\": \"01310-100\"\n  },\n  \"itens\": [\n    {\n      \"produtoId\": \"P005\",\n      \"quantidade\": 1\n    }\n  ],\n  \"cupom\": \"INEXISTENTE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST pedidos com cupom VERAO2026",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo CUPOM_EXPIRADO\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"CUPOM_EXPIRADO\"));",
+                  "pm.test(\"erro.campo cupom\", () => pm.expect(pm.response.json().erro.campo).to.eql(\"cupom\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/pedidos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "pedidos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"nome\": \"Maria Silva\",\n    \"email\": \"maria@exemplo.com\",\n    \"cep\": \"01310-100\"\n  },\n  \"itens\": [\n    {\n      \"produtoId\": \"P005\",\n      \"quantidade\": 1\n    }\n  ],\n  \"cupom\": \"VERAO2026\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CT-19 Pedido com cliente inválido",
+      "item": [
+        {
+          "name": "POST pedidos nome sem sobrenome",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo DADOS_INVALIDOS\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"DADOS_INVALIDOS\"));",
+                  "pm.test(\"campos aponta cliente.nome\", () => { const c = pm.response.json().erro.campos; pm.expect(c.some(x => x.campo === \"cliente.nome\" && x.mensagem === \"Informe nome e sobrenome.\")).to.eql(true); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/pedidos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "pedidos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"nome\": \"Maria\",\n    \"email\": \"maria@exemplo.com\",\n    \"cep\": \"01310100\"\n  },\n  \"itens\": [\n    {\n      \"produtoId\": \"P005\",\n      \"quantidade\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST pedidos e-mail inválido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo DADOS_INVALIDOS\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"DADOS_INVALIDOS\"));",
+                  "pm.test(\"campos aponta cliente.email\", () => { const c = pm.response.json().erro.campos; pm.expect(c.some(x => x.campo === \"cliente.email\" && x.mensagem === \"Informe um e-mail válido.\")).to.eql(true); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/pedidos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "pedidos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"nome\": \"Maria Silva\",\n    \"email\": \"maria@exemplo\",\n    \"cep\": \"01310100\"\n  },\n  \"itens\": [\n    {\n      \"produtoId\": \"P005\",\n      \"quantidade\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST pedidos CEP com 7 dígitos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"erro.codigo DADOS_INVALIDOS\", () => pm.expect(pm.response.json().erro.codigo).to.eql(\"DADOS_INVALIDOS\"));",
+                  "pm.test(\"campos aponta cliente.cep\", () => { const c = pm.response.json().erro.campos; pm.expect(c.some(x => x.campo === \"cliente.cep\" && x.mensagem === \"Informe um CEP com 8 dígitos.\")).to.eql(true); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/pedidos",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "pedidos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"nome\": \"Maria Silva\",\n    \"email\": \"maria@exemplo.com\",\n    \"cep\": \"0131010\"\n  },\n  \"itens\": [\n    {\n      \"produtoId\": \"P005\",\n      \"quantidade\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
