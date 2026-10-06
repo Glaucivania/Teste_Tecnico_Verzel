@@ -2,7 +2,7 @@
 
 Validação de QA da entrega **VZS-142 (v2.3.0): cupom de desconto e frete grátis** da Verzel Store, uma loja fictícia usada como ambiente de teste.
 
-> **Resumo em 30 segundos:** 20 cenários em Gherkin, 16 passaram e 4 falharam, por causa de **2 bugs** ([BUG-001](bugs/BUG-001.md), alta: frete cobrado com subtotal de R$ 200,00, e [BUG-002](bugs/BUG-002.md), média: API aceita mais de 5 unidades). A automação Playwright cobre 3 cenários e roda verde. Histórico em [CHANGELOG](CHANGELOG.md).
+>  20 cenários em Gherkin, 16 passaram e 4 falharam, por causa de **2 bugs** ([BUG-001](bugs/BUG-001.md), alta: frete cobrado com subtotal de R$ 200,00, e [BUG-002](bugs/BUG-002.md), média: API aceita mais de 5 unidades). A automação Playwright cobre 3 cenários e roda verde. Histórico em [CHANGELOG](CHANGELOG.md).
 
 ## Visão geral
 
