@@ -1,0 +1,29 @@
+$kind: http-request
+url: "{{base}}/pedidos"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "cliente": {
+        "nome": "Maria Silva",
+        "email": "maria@exemplo.com",
+        "cep": "0131010"
+      },
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 1
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 422", () => pm.response.to.have.status(422));
+      pm.test("erro.codigo DADOS_INVALIDOS", () => pm.expect(pm.response.json().erro.codigo).to.eql("DADOS_INVALIDOS"));
+      pm.test("campos aponta cliente.cep", () => { const c = pm.response.json().erro.campos; pm.expect(c.some(x => x.campo === "cliente.cep" && x.mensagem === "Informe um CEP com 8 dígitos.")).to.eql(true); });
+    language: text/javascript
+order: 3000

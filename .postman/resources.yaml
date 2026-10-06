@@ -3,7 +3,7 @@ workspace:
   id: 24925c61-451c-4d94-860f-75dd17926718
 
 # All resources in the `postman/` folder are automatically registered in Local View.
-# Additional files registered individually:
-localResources:
-  collections:
-    - ../postman/Verzel Store API.postman_collection.json
+# Point to additional files outside the `postman/` folder to register them individually. Example:
+#localResources:
+#  collections:
+#    - ../tests/E2E Test Collection/

@@ -1,0 +1,29 @@
+$kind: http-request
+url: "{{base}}/pedidos"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "cliente": {
+        "nome": "Maria Silva",
+        "email": "maria@exemplo.com",
+        "cep": "01310-100"
+      },
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 1
+        }
+      ],
+      "cupom": "BEMVINDO10"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 201", () => pm.response.to.have.status(201));
+      pm.test("numero VZ-000000, valores e CEP sem hifen", () => { const j = pm.response.json(); pm.expect(j.numero).to.match(/^VZ-\d{6}$/); pm.expect(j.subtotal).to.eql(100); pm.expect(j.desconto).to.eql(10); pm.expect(j.frete).to.eql(19.9); pm.expect(j.total).to.eql(109.9); pm.expect(j.cliente.cep).to.eql("01310100"); });
+    language: text/javascript
+order: 1000

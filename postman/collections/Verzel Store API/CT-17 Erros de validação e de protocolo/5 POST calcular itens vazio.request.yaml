@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "itens": []
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 422", () => pm.response.to.have.status(422));
+      pm.test("erro.codigo ITENS_OBRIGATORIOS", () => pm.expect(pm.response.json().erro.codigo).to.eql("ITENS_OBRIGATORIOS"));
+    language: text/javascript
+order: 5000

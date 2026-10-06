@@ -1,0 +1,28 @@
+$kind: http-request
+url: "{{base}}/pedidos"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "cliente": {
+        "nome": "Maria Silva",
+        "email": "maria@exemplo.com",
+        "cep": "01310-100"
+      },
+      "itens": [
+        {
+          "produtoId": "P001",
+          "quantidade": 6
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 422", () => pm.response.to.have.status(422));
+      pm.test("erro.codigo QUANTIDADE_MAXIMA_EXCEDIDA", () => pm.expect(pm.response.json().erro.codigo).to.eql("QUANTIDADE_MAXIMA_EXCEDIDA"));
+    language: text/javascript
+order: 2000

@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 2
+        }
+      ],
+      "cupom": "VERAO2026"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 200", () => pm.response.to.have.status(200));
+      pm.test("sem desconto e cupom nao aplicado", () => { const j = pm.response.json(); pm.expect(j.desconto).to.eql(0); pm.expect(j.cupom.aplicado).to.eql(false); pm.expect(j.cupom.mensagem).to.eql("Cupom expirado."); });
+    language: text/javascript
+order: 2000
