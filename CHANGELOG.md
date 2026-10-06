@@ -6,6 +6,16 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 
 ## [Não lançado]
 
+## [0.5.0] - 2026-10-06
+
+### Adicionado
+- Fase 4: automação Playwright com TypeScript em `automacao/` para 3 cenários: CT-01 (cupom válido, UI), CT-08 (limite do frete, UI, 3 valores) e CT-18 (cálculo da API).
+- Page Objects `ProductsPage` e `CartPage`, helper de valores em reais e relatório HTML com trace e screenshot em falha.
+- O caso de R$ 200,00 do CT-08 está marcado com `test.fail` e referência ao BUG-001. Suíte verde: 5 testes passando.
+
+### Alterado
+- `@automatizado` agora marca apenas CT-01, CT-08 e CT-18 (antes eram 6 candidatos).
+
 ## [0.4.0] - 2026-10-06
 
 ### Adicionado
@@ -59,7 +69,8 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 - Documentos de apoio com cabeçalho e plano: `docs/ambiguidades.md`, `docs/estrategia-de-testes.md`, `docs/matriz-rastreabilidade.md`, `docs/evidencias.md` e `execucao/resultados.md`.
 - Enunciado do desafio em `docs/enunciado-teste-tecnico-qa-junior.pdf`.
 
-[Não lançado]: ../../compare/v0.4.0...develop
+[Não lançado]: ../../compare/v0.5.0...develop
+[0.5.0]: ../../releases/tag/v0.5.0
 [0.4.0]: ../../releases/tag/v0.4.0
 [0.3.2]: ../../releases/tag/v0.3.2
 [0.3.1]: ../../releases/tag/v0.3.1

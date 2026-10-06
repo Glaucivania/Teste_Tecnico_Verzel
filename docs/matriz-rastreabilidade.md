@@ -27,11 +27,11 @@ Liga cada regra da documentação aos cenários previstos. Os cenários estão e
 |---|---|---|
 | CA01 | 3 | CT-01, CT-18 |
 | CA02 | 1 | |
-| CA03 | 4 | CT-03 |
-| CA04 | 3 | CT-04 |
+| CA03 | 4 | |
+| CA04 | 3 | |
 | CA05 | 1 | |
 | CA06 e CA07 | 3 | CT-08 |
-| CA08 | 1 | CT-09 |
+| CA08 | 1 | |
 | CA09 | 1 | |
 | CA10 | 2 | |
 | CA11 | 1 | |

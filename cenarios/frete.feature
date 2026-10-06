@@ -27,7 +27,7 @@ Funcionalidade: Frete grátis e cálculo de totais
       | 4 Garrafa Térmica 750ml                  | R$ 200,00  | Grátis   | R$ 200,00  | nenhuma                               |
       | 1 Jaqueta Corta-Vento                    | R$ 229,90  | Grátis   | R$ 229,90  | nenhuma                               |
 
-  @CT-09 @regressao @ui @P1 @automatizado
+  @CT-09 @regressao @ui @P1
   Cenário: CT-09 O frete grátis usa o subtotal antes do cupom (CA08)
     Dado que o carrinho tem 4 Garrafa Térmica 750ml
     Quando aplico o cupom "BEMVINDO10"

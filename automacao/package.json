@@ -1,8 +1,8 @@
 {
   "name": "verzel-store-qa-automacao",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "private": true,
-  "description": "Automação Playwright da entrega VZS-142 (cupom e frete grátis) da Verzel Store",
+  "description": "Automa\u00c3\u00a7\u00c3\u00a3o Playwright da entrega VZS-142 (cupom e frete gr\u00c3\u00a1tis) da Verzel Store",
   "scripts": {
     "test": "playwright test",
     "test:ui": "playwright test --project=ui",

@@ -32,7 +32,7 @@ Funcionalidade: Cupom de desconto no carrinho
       |   BEMVINDO10   |
       |   bemvindo10   |
 
-  @CT-03 @smoke @regressao @ui @P1 @automatizado
+  @CT-03 @smoke @regressao @ui @P1
   Cenário: CT-03 Cupom inexistente exibe "Cupom inválido." e não dá desconto (CA03)
     Dado que adicionei "Camiseta Essencial" ao carrinho
     Quando aplico o cupom "INEXISTENTE"
@@ -40,7 +40,7 @@ Funcionalidade: Cupom de desconto no carrinho
     E o desconto é "R$ 0,00"
     E o total é "R$ 79,80"
 
-  @CT-04 @smoke @regressao @ui @P1 @automatizado
+  @CT-04 @smoke @regressao @ui @P1
   Cenário: CT-04 Cupom expirado exibe "Cupom expirado." e não dá desconto (CA04)
     Dado que adicionei "Camiseta Essencial" ao carrinho
     Quando aplico o cupom "VERAO2026"
