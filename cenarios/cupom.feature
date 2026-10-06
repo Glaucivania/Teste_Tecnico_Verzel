@@ -1,91 +1,90 @@
-# language: pt
-@cupom
-Funcionalidade: Cupom de desconto no carrinho
-  Como cliente da Verzel Store
-  Quero aplicar um cupom de desconto no carrinho
-  Para pagar menos nas minhas compras
+@coupon
+Feature: Discount coupon in the cart
+  As a Verzel Store customer
+  I want to apply a discount coupon in the cart
+  So that I pay less on my purchases
 
-  Contexto:
-    Dado que o carrinho está vazio
+  Background:
+    Given the cart is empty
 
-  @CT-01 @smoke @regressao @ui @P1 @automatizado
-  Cenário: CT-01 Aplicar o cupom BEMVINDO10 dá 10% sobre o subtotal (CA01)
-    Dado que adicionei "Camiseta Essencial" ao carrinho
-    Quando aplico o cupom "BEMVINDO10"
-    Então vejo a mensagem "Cupom BEMVINDO10 aplicado."
-    E o subtotal é "R$ 59,90"
-    E o desconto é "- R$ 5,99"
-    E o frete é "R$ 19,90"
-    E o total é "R$ 73,81"
+  @CT-01 @smoke @regression @ui @P1 @automated
+  Scenario: CT-01 Applying BEMVINDO10 gives 10% off the subtotal (CA01)
+    Given I added "Camiseta Essencial" to the cart
+    When I apply the coupon "BEMVINDO10"
+    Then I see the message "Cupom BEMVINDO10 aplicado."
+    And the subtotal is "R$ 59,90"
+    And the discount is "- R$ 5,99"
+    And the shipping is "R$ 19,90"
+    And the total is "R$ 73,81"
 
-  @CT-02 @regressao @ui @P1
-  Esquema do Cenário: CT-02 O código do cupom ignora maiúsculas e espaços nas pontas (CA02)
-    Dado que adicionei "Camiseta Essencial" ao carrinho
-    Quando aplico o cupom "<codigo>"
-    Então o cupom "BEMVINDO10" fica aplicado
-    E o desconto é "- R$ 5,99"
+  @CT-02 @regression @ui @P1
+  Scenario Outline: CT-02 The coupon code ignores letter case and surrounding spaces (CA02)
+    Given I added "Camiseta Essencial" to the cart
+    When I apply the coupon "<code>"
+    Then the coupon "BEMVINDO10" is applied
+    And the discount is "- R$ 5,99"
 
-    Exemplos:
-      | codigo         |
+    Examples:
+      | code           |
       | bemvindo10     |
       | BemVindo10     |
       |   BEMVINDO10   |
       |   bemvindo10   |
 
-  @CT-03 @smoke @regressao @ui @P1 @automatizado
-  Cenário: CT-03 Cupom inexistente exibe "Cupom inválido." e não dá desconto (CA03)
-    Dado que adicionei "Camiseta Essencial" ao carrinho
-    Quando aplico o cupom "INEXISTENTE"
-    Então vejo a mensagem "Cupom inválido."
-    E o desconto é "R$ 0,00"
-    E o total é "R$ 79,80"
+  @CT-03 @smoke @regression @ui @P1 @automated
+  Scenario: CT-03 A nonexistent coupon shows "Cupom inválido." and gives no discount (CA03)
+    Given I added "Camiseta Essencial" to the cart
+    When I apply the coupon "INEXISTENTE"
+    Then I see the message "Cupom inválido."
+    And the discount is "R$ 0,00"
+    And the total is "R$ 79,80"
 
-  @CT-04 @smoke @regressao @ui @P1 @automatizado
-  Cenário: CT-04 Cupom expirado exibe "Cupom expirado." e não dá desconto (CA04)
-    Dado que adicionei "Camiseta Essencial" ao carrinho
-    Quando aplico o cupom "VERAO2026"
-    Então vejo a mensagem "Cupom expirado."
-    E o desconto é "R$ 0,00"
-    E o total é "R$ 79,80"
+  @CT-04 @smoke @regression @ui @P1 @automated
+  Scenario: CT-04 An expired coupon shows "Cupom expirado." and gives no discount (CA04)
+    Given I added "Camiseta Essencial" to the cart
+    When I apply the coupon "VERAO2026"
+    Then I see the message "Cupom expirado."
+    And the discount is "R$ 0,00"
+    And the total is "R$ 79,80"
 
-  @CT-05 @regressao @ui @P3
-  Esquema do Cenário: CT-05 Cupom vazio ou cupom com carrinho vazio não aplica desconto (AMB-05, AMB-08)
-    Dado que o carrinho tem <itens>
-    Quando aplico o cupom "<codigo>"
-    Então nenhum cupom fica aplicado
-    E o desconto é "R$ 0,00"
-    E vejo um feedback claro ao usuário
+  @CT-05 @regression @ui @P3
+  Scenario Outline: CT-05 An empty coupon, or a coupon on an empty cart, gives no discount (AMB-05, AMB-08)
+    Given the cart has <items>
+    When I apply the coupon "<code>"
+    Then no coupon is applied
+    And the discount is "R$ 0,00"
+    And I see clear feedback
 
-    Exemplos:
-      | itens                  | codigo     |
-      | "Camiseta Essencial"   |            |
-      | "Camiseta Essencial"   | somente espaços |
-      | nenhum item            | BEMVINDO10 |
+    Examples:
+      | items                | code            |
+      | "Camiseta Essencial" |                 |
+      | "Camiseta Essencial" | only spaces     |
+      | no items             | BEMVINDO10      |
 
-  @CT-06 @regressao @ui @P2
-  Cenário: CT-06 Só um cupom por vez e sem acúmulo ao reaplicar (CA05, AMB-06, AMB-07)
-    Dado que adicionei "Camiseta Essencial" ao carrinho
-    E que apliquei o cupom "BEMVINDO10"
-    Quando aplico o cupom "BEMVINDO10" novamente
-    Então o desconto continua "- R$ 5,99"
-    Quando tento aplicar o cupom "VERAO2026" com o "BEMVINDO10" ainda ativo
-    Então o cupom "BEMVINDO10" continua aplicado
-    E há apenas um cupom ativo
+  @CT-06 @regression @ui @P2
+  Scenario: CT-06 Only one coupon at a time, with no stacking on reapply (CA05, AMB-06, AMB-07)
+    Given I added "Camiseta Essencial" to the cart
+    And I applied the coupon "BEMVINDO10"
+    When I apply the coupon "BEMVINDO10" again
+    Then the discount is still "- R$ 5,99"
+    When I try to apply the coupon "VERAO2026" while "BEMVINDO10" is still active
+    Then the coupon "BEMVINDO10" is still applied
+    And there is only one active coupon
 
-  @CT-07 @regressao @ui @P1
-  Cenário: CT-07 Remover item ou cupom recalcula desconto e frete (AMB-04)
-    Dado que adicionei "Calça Jeans Slim" ao carrinho
-    E que adicionei "Boné Aba Curva" ao carrinho com quantidade 2
-    E que apliquei o cupom "BEMVINDO10"
-    Então o subtotal é "R$ 239,70"
-    E o desconto é "- R$ 23,97"
-    E o frete é "Grátis"
-    E o total é "R$ 215,73"
-    Quando removo "Calça Jeans Slim" do carrinho
-    Então o subtotal é "R$ 99,80"
-    E o desconto é "- R$ 9,98"
-    E o frete é "R$ 19,90"
-    E o total é "R$ 109,72"
-    Quando removo o cupom
-    Então o desconto é "R$ 0,00"
-    E o total é "R$ 119,70"
+  @CT-07 @regression @ui @P1
+  Scenario: CT-07 Removing an item or the coupon recalculates discount and shipping (AMB-04)
+    Given I added "Calça Jeans Slim" to the cart
+    And I added "Boné Aba Curva" to the cart with quantity 2
+    And I applied the coupon "BEMVINDO10"
+    Then the subtotal is "R$ 239,70"
+    And the discount is "- R$ 23,97"
+    And the shipping is "Grátis"
+    And the total is "R$ 215,73"
+    When I remove "Calça Jeans Slim" from the cart
+    Then the subtotal is "R$ 99,80"
+    And the discount is "- R$ 9,98"
+    And the shipping is "R$ 19,90"
+    And the total is "R$ 109,72"
+    When I remove the coupon
+    Then the discount is "R$ 0,00"
+    And the total is "R$ 119,70"

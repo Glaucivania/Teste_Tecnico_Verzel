@@ -6,6 +6,13 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 
 ## [Não lançado]
 
+## [0.3.1] - 2026-10-06
+
+### Alterado
+- Cenários Gherkin reescritos em inglês (`Feature`, `Scenario Outline`, `Given`, `When`, `Then`). Textos da loja continuam em português entre aspas.
+- Tags renomeadas: `@regressao` para `@regression` e `@automatizado` para `@automated`. Tags de contexto em inglês (`@coupon`, `@shipping`, `@cart`, `@consistency`).
+- Removido o cabeçalho `# language: pt`.
+
 ## [0.3.0] - 2026-10-06
 
 ### Adicionado
@@ -35,7 +42,8 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 - Documentos de apoio com cabeçalho e plano: `docs/ambiguidades.md`, `docs/estrategia-de-testes.md`, `docs/matriz-rastreabilidade.md`, `docs/evidencias.md` e `execucao/resultados.md`.
 - Enunciado do desafio em `docs/enunciado-teste-tecnico-qa-junior.pdf`.
 
-[Não lançado]: ../../compare/v0.3.0...develop
+[Não lançado]: ../../compare/v0.3.1...develop
+[0.3.1]: ../../releases/tag/v0.3.1
 [0.3.0]: ../../releases/tag/v0.3.0
 [0.2.0]: ../../releases/tag/v0.2.0
 [0.1.0]: ../../releases/tag/v0.1.0
