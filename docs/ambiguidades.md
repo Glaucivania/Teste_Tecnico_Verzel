@@ -30,13 +30,13 @@ Fonte: [documentação da entrega VZS-142](https://verzel-store.qa-test-verzel-s
 |---|---|---|---|
 | AMB-01 | O carrinho persiste ao recarregar a mesma aba? | Sim, o carrinho e o cupom devem ser mantidos. | Confirmado na UI: itens e cupom persistem ao recarregar (guardados em `sessionStorage`). |
 | AMB-02 | O que a UI faz ao tentar mais de 5 unidades? | Qualquer feedback claro é aceito, desde que a quantidade nunca passe de 5. | Confirmado na UI: o botão + fica desabilitado em 5 e aparece "Limite de 5 unidades por produto." |
-| AMB-03 | Qual o critério de arredondamento? | Arredondamento comercial (meio para cima) em 2 casas. | Confirmado: valores com 2 casas, sem erro de ponto flutuante (CT-11). Com 10% o arredondamento nunca é exercido. |
-| AMB-04 | Itens removidos com cupom aplicado: o desconto é recalculado? | Sim, sobre o novo subtotal, e o frete é reavaliado. | Confirmado: desconto recalculado sobre o novo subtotal e frete reavaliado (CT-07). |
-| AMB-05 | Cupom com carrinho vazio? | Não aplica desconto e sinaliza de forma clara. | Confirmado: carrinho vazio mostra a tela "Seu carrinho está vazio", sem campo de cupom (CT-05). |
-| AMB-06 | Reaplicar o mesmo cupom? | Não acumula, o desconto continua em 10%. | Confirmado: depois de aplicar, o campo some e não acumula (CT-06). |
-| AMB-07 | Aplicar um segundo cupom com um já ativo? | A UI bloqueia ou avisa que é preciso remover o atual (CA05). | Confirmado: um segundo cupom só entra após "Remover cupom" (CT-06). |
-| AMB-08 | Cupom vazio ou só com espaços? | Não aplica nada e dá feedback claro. | Confirmado: aparece "Informe um cupom." e nada é aplicado (CT-05). |
-| AMB-09 | Textos de erro de nome, e-mail e CEP não estão definidos. | Valido as regras listadas e registro o texto observado. | Confirmado: "Informe nome e sobrenome.", "Informe um e-mail válido." e "Informe um CEP com 8 dígitos." (CT-15 e CT-23). |
+| AMB-03 | Qual o critério de arredondamento? | Arredondamento comercial (meio para cima) em 2 casas. | Confirmado: valores com 2 casas, sem erro de ponto flutuante (CT-05). Com 10% o arredondamento nunca é exercido. |
+| AMB-04 | Itens removidos com cupom aplicado: o desconto é recalculado? | Sim, sobre o novo subtotal, e o frete é reavaliado. | Confirmado: desconto recalculado sobre o novo subtotal e frete reavaliado (CT-05). |
+| AMB-05 | Cupom com carrinho vazio? | Não aplica desconto e sinaliza de forma clara. | Confirmado: carrinho vazio mostra a tela "Seu carrinho está vazio", sem campo de cupom (CT-04). |
+| AMB-06 | Reaplicar o mesmo cupom? | Não acumula, o desconto continua em 10%. | Confirmado: depois de aplicar, o campo some e não acumula (CT-04). |
+| AMB-07 | Aplicar um segundo cupom com um já ativo? | A UI bloqueia ou avisa que é preciso remover o atual (CA05). | Confirmado: um segundo cupom só entra após "Remover cupom" (CT-04). |
+| AMB-08 | Cupom vazio ou só com espaços? | Não aplica nada e dá feedback claro. | Confirmado: aparece "Informe um cupom." e nada é aplicado (CT-04). |
+| AMB-09 | Textos de erro de nome, e-mail e CEP não estão definidos. | Valido as regras listadas e registro o texto observado. | Confirmado: "Informe nome e sobrenome.", "Informe um e-mail válido." e "Informe um CEP com 8 dígitos." (CT-11 e CT-19). |
 | AMB-10 | `calcular` com quantidade maior que 5? | Responde 422 `QUANTIDADE_MAXIMA_EXCEDIDA`, como a tabela de erros. | **Divergente**: a API respondeu 200 com quantidade 6 (ver BUG-002). |
 | AMB-11 | O "faltante para frete grátis" usa o subtotal ou o subtotal menos o desconto? | Subtotal, coerente com o CA08. | Confirmado: o faltante usa o subtotal (ex.: subtotal 179,70 com cupom mostra "Faltam R$ 20,30"). |
 
