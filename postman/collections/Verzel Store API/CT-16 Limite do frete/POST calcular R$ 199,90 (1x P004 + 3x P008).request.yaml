@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "itens": [
+        {
+          "produtoId": "P004",
+          "quantidade": 1
+        },
+        {
+          "produtoId": "P008",
+          "quantidade": 3
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 200", () => pm.response.to.have.status(200));
+      pm.test("frete 19.9, freteGratis false, total 219.8", () => { const j = pm.response.json(); pm.expect(j.frete).to.eql(19.9); pm.expect(j.freteGratis).to.eql(false); pm.expect(j.valorFaltanteFreteGratis).to.eql(0.1); pm.expect(j.total).to.eql(219.8); });
+    language: text/javascript
+order: 1000

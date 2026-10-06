@@ -1,0 +1,30 @@
+$kind: http-request
+url: "{{base}}/pedidos"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "cliente": {
+        "nome": "Maria Silva",
+        "email": "maria@exemplo.com",
+        "cep": "01310-100"
+      },
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 1
+        }
+      ],
+      "cupom": "INEXISTENTE"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 422", () => pm.response.to.have.status(422));
+      pm.test("erro.codigo CUPOM_INVALIDO", () => pm.expect(pm.response.json().erro.codigo).to.eql("CUPOM_INVALIDO"));
+      pm.test("erro.campo cupom", () => pm.expect(pm.response.json().erro.campo).to.eql("cupom"));
+    language: text/javascript
+order: 2000
