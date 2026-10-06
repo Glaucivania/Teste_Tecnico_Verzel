@@ -15,7 +15,7 @@ Escritos em Gherkin, em português (`# language: pt`). 24 cenários, 5 arquivos.
 - **Tipo:** `@ui`, `@api`
 - **Suíte:** `@smoke`, `@regressao`
 - **Prioridade:** `@P1`, `@P2`, `@P3`
-- **Automação:** `@automatizado` marca os 6 cenários implementados no Playwright (CT-01, CT-03, CT-04, CT-08, CT-09, CT-18)
+- **Automação:** `@automatizado` marca os 3 cenários implementados no Playwright (CT-01, CT-08 e CT-18)
 - **Rastreio:** `@CT-NN` identifica o cenário
 
 Os IDs `CT-NN` são os mesmos usados em `execucao/resultados.md`, na matriz de rastreabilidade e nos nomes das evidências.

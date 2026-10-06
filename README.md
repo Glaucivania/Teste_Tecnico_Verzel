@@ -2,7 +2,7 @@
 
 Validação de QA da entrega **VZS-142 (v2.3.0): cupom de desconto e frete grátis** da Verzel Store, uma loja fictícia usada como ambiente de teste.
 
-> **Status do projeto:** Fases 0 a 2 concluídas (v0.4.0). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
+> **Status do projeto:** Fases 0, 1, 2 e 4 concluídas (v0.5.0). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
 
 ## Visão geral
 
@@ -35,7 +35,7 @@ Cada item do desafio e o lugar onde ele está:
 | 2 | Execução (manual e exploratória) | [`execucao/resultados.md`](execucao/resultados.md) | Concluído (20 passaram, 4 falharam) |
 | 3 | Report de bugs | [`bugs/`](bugs/) | Concluído (2 bugs) |
 | 4 | Documento de evidências | [`docs/evidencias.md`](docs/evidencias.md) e [`evidencias/`](evidencias/) | Concluído |
-| 5 | Automação com Playwright | [`automacao/`](automacao/) | Pendente |
+| 5 | Automação com Playwright | [`automacao/`](automacao/) | Concluído (3 cenários, 5 testes) |
 | 6 | README | Este arquivo | Em andamento |
 
 Documentos de apoio:
@@ -65,6 +65,7 @@ Documentos de apoio:
     ├── playwright.config.ts
     ├── package.json
     ├── pages/                  Page Objects
+    ├── support/                helpers (formato de valores)
     └── tests/                  testes de UI e API
 ```
 
@@ -74,7 +75,7 @@ Documentos de apoio:
 - **Técnicas:** partição de equivalência, análise de valor limite (subtotal 199,90, 200,00 e 229,90, já que o catálogo não permite 199,99 e 200,01; quantidade 0, 1, 5 e 6), tabela de decisão e transição de estados.
 - **Gherkin em português**, com Esquema do Cenário para casos de limite, e tags `@smoke`, `@regressao`, `@api`, `@ui`, `@automatizado` e `@P1` a `@P3`.
 - **Execução:** manual guiada pelos cenários, 2 sessões exploratórias de 30 minutos e testes de API com `curl`, com poucas requisições.
-- **Automação:** 6 cenários de alto valor (cupom válido, inválido, expirado, limite do frete, cupom com frete e cálculo via API). Bugs conhecidos ficam como `test.fail` com o ID do bug.
+- **Automação:** 3 cenários de maior valor para o negócio, escolhidos por cobrirem o coração da entrega: **CT-01** (aplicar cupom válido, UI), **CT-08** (limite do frete grátis, UI, 3 valores) e **CT-18** (cálculo da API com cupom e frete). Bugs conhecidos ficam como `test.fail` com o ID do bug.
 
 ## Como rodar a automação
 
@@ -106,7 +107,27 @@ npm run test:api     # apenas testes de API
 npm run test:headed  # com o navegador visível
 ```
 
-> Os scripts e testes são criados na Fase 4. Até lá, os comandos acima já descrevem o formato final.
+**O que a suíte executa** (5 testes, cerca de 10 segundos)
+
+| Teste | Cenário | Camada | Resultado esperado |
+|---|---|---|---|
+| CT-01 aplicar BEMVINDO10 dá 10% sobre o subtotal | CT-01 | UI | Passa |
+| CT-08 frete abaixo do limite (R$ 199,90) | CT-08 | UI | Passa |
+| CT-08 frete exatamente no limite (R$ 200,00) | CT-08 | UI | **Marcado `test.fail` (BUG-001)** |
+| CT-08 frete acima do limite (R$ 229,90) | CT-08 | UI | Passa |
+| CT-18 calcular carrinho com BEMVINDO10 | CT-18 | API | Passa |
+
+A suíte fica **verde** (`5 passed`). O teste do limite de R$ 200,00 falha de propósito por causa do [BUG-001](bugs/BUG-001.md). Quando o bug for corrigido, o Playwright vai acusar esse teste como "esperava falhar, mas passou", sinal para remover o `test.fail`.
+
+**Como a automação é organizada** (em [`automacao/`](automacao/))
+
+- `pages/`: Page Objects enxutos (`ProductsPage`, `CartPage`).
+- `tests/`: `*.ui.spec.ts` (projeto `ui`, Chromium) e `*.api.spec.ts` (projeto `api`, `request` do Playwright).
+- `support/money.ts`: formatação de valores em reais para as asserções.
+- Seletores: `getByRole`, `getByTestId` (a loja expõe `data-valor` nos valores do resumo, configurado como `testIdAttribute`) e `getByText`. Sem `sleep` fixo, só asserções com espera automática.
+- Independência: cada teste roda em um contexto novo, com carrinho próprio. Nos testes de frete, o carrinho é preparado no `sessionStorage` antes de a página carregar, para montar o subtotal rápido. O CT-01 usa o fluxo completo (vitrine, adicionar, carrinho, cupom).
+- Ambiente compartilhado: 1 worker, sem repetições e sem loops de requisições.
+- Relatório HTML em `automacao/playwright-report/`, com trace e screenshot em caso de falha.
 
 **Cuidados com o ambiente compartilhado:** a suíte roda com 1 worker, sem loops de requisições, e cada teste usa um contexto de navegador novo, então tem carrinho próprio e não interfere em outras pessoas.
 

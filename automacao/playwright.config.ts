@@ -13,6 +13,7 @@ export default defineConfig({
   expect: { timeout: 5_000 },
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
+    testIdAttribute: 'data-valor',
     baseURL,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
@@ -21,7 +22,8 @@ export default defineConfig({
     {
       name: 'ui',
       testMatch: /.*\.ui\.spec\.ts/,
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+    testIdAttribute: 'data-valor', ...devices['Desktop Chrome'] },
     },
     {
       name: 'api',

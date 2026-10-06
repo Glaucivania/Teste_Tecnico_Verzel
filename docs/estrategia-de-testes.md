@@ -37,7 +37,7 @@ Validar a entrega VZS-142 (cupom de desconto e frete grátis) na UI e na API, e 
 
 ## Automação
 
-Playwright com TypeScript. Candidatos: CT-01, CT-03, CT-04, CT-08, CT-09 (UI) e CT-18 (API). Detalhes no README.
+Playwright com TypeScript, limitado a **3 cenários** de maior valor: CT-01 (cupom válido, UI), CT-08 (limite do frete, UI) e CT-18 (cálculo da API). Os demais ficam como execução manual. Detalhes no README.
 
 ## Critérios de pronto
 
