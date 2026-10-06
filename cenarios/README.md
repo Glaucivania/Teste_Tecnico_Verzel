@@ -1,6 +1,6 @@
 # Cenários
 
-Escritos em Gherkin na língua original, o inglês (`Feature`, `Scenario`, `Given`, `When`, `Then`). Os textos da loja, como mensagens e nomes de produtos, ficam em português entre aspas, pois são dados reais da aplicação. 24 cenários, 5 arquivos.
+Escritos em Gherkin, em português (`# language: pt`). 24 cenários, 5 arquivos.
 
 | Arquivo | Cenários | Foco |
 |---|---|---|
@@ -13,9 +13,9 @@ Escritos em Gherkin na língua original, o inglês (`Feature`, `Scenario`, `Give
 ## Tags
 
 - **Tipo:** `@ui`, `@api`
-- **Suíte:** `@smoke`, `@regression`
+- **Suíte:** `@smoke`, `@regressao`
 - **Prioridade:** `@P1`, `@P2`, `@P3`
-- **Automação:** `@automated` marca os 6 cenários implementados no Playwright (CT-01, CT-03, CT-04, CT-08, CT-09, CT-18)
+- **Automação:** `@automatizado` marca os 6 cenários implementados no Playwright (CT-01, CT-03, CT-04, CT-08, CT-09, CT-18)
 - **Rastreio:** `@CT-NN` identifica o cenário
 
 Os IDs `CT-NN` são os mesmos usados em `execucao/resultados.md`, na matriz de rastreabilidade e nos nomes das evidências.

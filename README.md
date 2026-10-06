@@ -2,7 +2,7 @@
 
 Validação de QA da entrega **VZS-142 (v2.3.0): cupom de desconto e frete grátis** da Verzel Store, uma loja fictícia usada como ambiente de teste.
 
-> **Status do projeto:** Fase 1 concluída (v0.3.1). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
+> **Status do projeto:** Fase 1 concluída (v0.3.2). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
 
 ## Visão geral
 
@@ -56,7 +56,7 @@ Documentos de apoio:
 │   ├── estrategia-de-testes.md
 │   ├── matriz-rastreabilidade.md
 │   └── evidencias.md
-├── cenarios/                   arquivos .feature (Gherkin, em inglês)
+├── cenarios/                   arquivos .feature (Gherkin, em português)
 ├── execucao/
 │   └── resultados.md           resultado de cada cenário e sessões exploratórias
 ├── bugs/                       um arquivo por bug (BUG-001.md ...)
@@ -72,7 +72,7 @@ Documentos de apoio:
 
 - **24 cenários** priorizados (P1 a P3), cobrindo cupom, frete grátis, quantidade máxima, checkout, API e consistência entre UI e API.
 - **Técnicas:** partição de equivalência, análise de valor limite (subtotal 199,90, 200,00 e 229,90, já que o catálogo não permite 199,99 e 200,01; quantidade 0, 1, 5 e 6), tabela de decisão e transição de estados.
-- **Gherkin em inglês** (a língua original da linguagem), com `Scenario Outline` para casos de limite, e tags `@smoke`, `@regression`, `@api`, `@ui`, `@automated` e `@P1` a `@P3`. Mensagens e nomes de produtos da loja ficam em português entre aspas.
+- **Gherkin em português**, com Esquema do Cenário para casos de limite, e tags `@smoke`, `@regressao`, `@api`, `@ui`, `@automatizado` e `@P1` a `@P3`.
 - **Execução:** manual guiada pelos cenários, 2 sessões exploratórias de 30 minutos e testes de API com `curl`, com poucas requisições.
 - **Automação:** 6 cenários de alto valor (cupom válido, inválido, expirado, limite do frete, cupom com frete e cálculo via API). Bugs conhecidos ficam como `test.fail` com o ID do bug.
 

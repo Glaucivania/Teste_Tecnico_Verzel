@@ -30,7 +30,7 @@ Validar a entrega VZS-142 (cupom de desconto e frete grátis) na UI e na API, e 
 
 ## Convenções
 
-- Gherkin em inglês (palavras-chave e passos), com textos da loja em português entre aspas. Tags `@smoke`, `@regression`, `@api`, `@ui`, `@automated` e `@P1` a `@P3`.
+- Gherkin em português. Tags `@smoke`, `@regressao`, `@api`, `@ui`, `@automatizado` e `@P1` a `@P3`.
 - IDs de cenário `CT-NN`, de bug `BUG-NNN`, de ambiguidade `AMB-NN`.
 - Evidências em `evidencias/CT-NN_descricao.ext`.
 - Resultados: Passou, Falhou ou Bloqueado.
