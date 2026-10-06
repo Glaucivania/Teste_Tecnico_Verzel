@@ -18,7 +18,7 @@ Execução de 06/10/2026 na v2.3.0 da Verzel Store. Resultado detalhado por cen�
 Cada cenário tem **uma única imagem** de evidência, sem texto adicional, nomeada `CT-NN_descricao.png`.
 
 - **Interface:** capturas de tela do Google Chrome 153. Nos cenários com vários casos, a imagem reúne as capturas lado a lado, sem legenda.
-- **API:** imagem com a requisição (método, URL e corpo) e a resposta com o status HTTP, a partir de uma chamada real à API. Não são capturas da tela do Postman.
+- **API:** capturas de tela do Postman, com a requisição (método e URL), a resposta com o status HTTP e a aba Test Results (a contagem de testes que passaram). No CT-20, a captura do Postman fica ao lado do resumo da loja.
 
 ## Anexos
 
@@ -38,13 +38,13 @@ Todos em [`../evidencias/`](../evidencias/).
 | CT-10 | [CT-10_checkout-ui.png](../evidencias/CT-10_checkout-ui.png) | Passou |
 | CT-11 | [CT-11_validacao-checkout-ui.png](../evidencias/CT-11_validacao-checkout-ui.png) | Passou |
 | CT-12 | [CT-12_responsividade-e-acessibilidade.png](../evidencias/CT-12_responsividade-e-acessibilidade.png) | Passou |
-| CT-13 | [CT-13_produtos-lista.png](../evidencias/CT-13_produtos-lista.png) | Passou |
-| CT-14 | [CT-14_calcular-bemvindo10.png](../evidencias/CT-14_calcular-bemvindo10.png) | Passou |
-| CT-15 | [CT-15_calcular-cupom-expirado.png](../evidencias/CT-15_calcular-cupom-expirado.png) | Passou |
-| CT-16 | [CT-16_calcular-200-00.png](../evidencias/CT-16_calcular-200-00.png) | **Falhou** (BUG-001) |
-| CT-17 | [CT-17_quantidade-6.png](../evidencias/CT-17_quantidade-6.png) | **Falhou** (BUG-002) |
-| CT-18 | [CT-18_pedido-bemvindo10.png](../evidencias/CT-18_pedido-bemvindo10.png) | Passou |
-| CT-19 | [CT-19_nome-sem-sobrenome.png](../evidencias/CT-19_nome-sem-sobrenome.png) | Passou |
+| CT-13 | [CT-13_produtos-lista.jpeg](../evidencias/CT-13_produtos-lista.jpeg) | Passou |
+| CT-14 | [CT-14_calcular-bemvindo10.jpeg](../evidencias/CT-14_calcular-bemvindo10.jpeg) | Passou |
+| CT-15 | [CT-15_calcular-cupom-expirado.jpeg](../evidencias/CT-15_calcular-cupom-expirado.jpeg) | Passou |
+| CT-16 | [CT-16_calcular-200-00.jpeg](../evidencias/CT-16_calcular-200-00.jpeg) | **Falhou** (BUG-001) |
+| CT-17 | [CT-17_quantidade-6.jpeg](../evidencias/CT-17_quantidade-6.jpeg) | **Falhou** (BUG-002) |
+| CT-18 | [CT-18_pedido-bemvindo10.jpeg](../evidencias/CT-18_pedido-bemvindo10.jpeg) | Passou |
+| CT-19 | [CT-19_nome-sem-sobrenome.jpeg](../evidencias/CT-19_nome-sem-sobrenome.jpeg) | Passou |
 | CT-20 | [CT-20_consistencia-ui-vs-api.png](../evidencias/CT-20_consistencia-ui-vs-api.png) | Passou |
 
 ## Limitações das evidências

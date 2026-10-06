@@ -15,7 +15,7 @@ Funcionalidade: API de produtos, cálculo de carrinho e pedidos
 
   @CT-18 @smoke @regressao @api @P1
   Cenário: CT-18 Confirmar um pedido e rejeitar cupom inválido ou expirado
-    Resultado da execução: Passou. Evidência: evidencias/CT-18_pedido-bemvindo10.png.
+    Resultado da execução: Passou. Evidência: evidencias/CT-18_pedido-bemvindo10.jpeg.
 
     Quando envio "POST {{base}}/pedidos" com o corpo
       """
