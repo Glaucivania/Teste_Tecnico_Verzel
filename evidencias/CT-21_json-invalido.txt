@@ -1,0 +1,6 @@
+# 2026-10-06T15:31:17Z
+POST /api/carrinho/calcular
+Body: nao e json
+---
+{"erro":{"codigo":"JSON_INVALIDO","mensagem":"O corpo da requisição deve ser um objeto JSON válido."}}
+HTTP 400

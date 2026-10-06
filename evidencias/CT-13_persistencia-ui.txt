@@ -1,0 +1,6 @@
+Execução manual na UI, 2026-10-06, Chromium embutido do app Claude (desktop). Texto da região <main> lido do DOM.
+
+5x Camiseta Essencial + cupom BEMVINDO10; página recarregada.
+Após o recarregamento: mesma quantidade (5), "Cupom BEMVINDO10 aplicado.", Total R$ 269,55.
+Armazenamento: sessionStorage (verzel-store:itens e verzel-store:cupom).
+Observação: ao usar "Esvaziar carrinho", o cupom também é limpo (cupom = null) e o novo item entra sem cupom.

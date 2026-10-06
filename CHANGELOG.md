@@ -6,6 +6,17 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 
 ## [Não lançado]
 
+## [0.4.0] - 2026-10-06
+
+### Adicionado
+- Fase 2: execução dos 24 cenários (20 passaram, 4 falharam), com evidências em `evidencias/` e resultados em `execucao/resultados.md`.
+- 2 sessões exploratórias (SE-01 e SE-02).
+- Report de bugs: BUG-001 (frete cobrado com subtotal de R$ 200,00, alta) e BUG-002 (API aceita mais de 5 unidades, média), com resumo executivo em `bugs/README.md`.
+- `docs/evidencias.md` com o resumo da execução e a lista de anexos.
+
+### Alterado
+- Ambiguidades AMB-03 a AMB-11 verificadas na loja.
+
 ## [0.3.2] - 2026-10-06
 
 ### Alterado
@@ -48,7 +59,8 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 - Documentos de apoio com cabeçalho e plano: `docs/ambiguidades.md`, `docs/estrategia-de-testes.md`, `docs/matriz-rastreabilidade.md`, `docs/evidencias.md` e `execucao/resultados.md`.
 - Enunciado do desafio em `docs/enunciado-teste-tecnico-qa-junior.pdf`.
 
-[Não lançado]: ../../compare/v0.3.2...develop
+[Não lançado]: ../../compare/v0.4.0...develop
+[0.4.0]: ../../releases/tag/v0.4.0
 [0.3.2]: ../../releases/tag/v0.3.2
 [0.3.1]: ../../releases/tag/v0.3.1
 [0.3.0]: ../../releases/tag/v0.3.0

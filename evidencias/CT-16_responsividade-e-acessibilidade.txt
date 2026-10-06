@@ -1,0 +1,5 @@
+2026-10-06, Chromium embutido, viewport 375x812 (mobile) e desktop.
+Responsividade: scrollWidth 375 = clientWidth 375 (sem rolagem horizontal); nenhum elemento fora da tela; nenhum alvo de toque menor que 24 px. Print: CT-16_carrinho-mobile-375.jpg.
+Acessibilidade: html lang = pt-BR; landmarks header, nav, main e footer; 1 h1; 0 controles sem nome acessível; campo de cupom com label "Cupom de desconto".
+Teclado: 12 Tabs percorrem links, quantidade, remover, campo de cupom, "Aplicar cupom" e "Finalizar compra", na ordem visual. Todos recebem outline sólido de 1,6 px (foco visível).
+Não foi usado leitor de tela nem ferramenta automática de contraste (limitação registrada no README).

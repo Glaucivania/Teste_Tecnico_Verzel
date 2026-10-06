@@ -1,0 +1,6 @@
+Execução manual na UI, 2026-10-06, Chromium embutido do app Claude (desktop). Texto da região <main> lido do DOM.
+
+Carrinho: 1x Calça Jeans Slim + 2x Boné Aba Curva, cupom BEMVINDO10.
+a) Subtotal R$ 239,70 | Desconto - R$ 23,97 | Frete Grátis | Total R$ 215,73
+b) Remover Calça Jeans Slim: Subtotal R$ 99,80 | Desconto - R$ 9,98 | Frete R$ 19,90 | Total R$ 109,72 | Faltam R$ 100,20 para o frete grátis.
+c) Remover cupom: Desconto R$ 0,00 | Total R$ 119,70

@@ -1,0 +1,5 @@
+# 2026-10-06T15:31:18Z
+GET /api/carrinho/calcular
+---
+{"erro":{"codigo":"METODO_NAO_PERMITIDO","mensagem":"O método GET não é permitido nesta rota."}}
+HTTP 405

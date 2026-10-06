@@ -1,0 +1,5 @@
+# 2026-10-06T15:31:18Z
+GET /api/rota-inexistente
+---
+{"erro":{"codigo":"ROTA_NAO_ENCONTRADA","mensagem":"Rota não encontrada."}}
+HTTP 404
