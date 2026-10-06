@@ -2,7 +2,7 @@
 
 Validação de QA da entrega **VZS-142 (v2.3.0): cupom de desconto e frete grátis** da Verzel Store, uma loja fictícia usada como ambiente de teste.
 
-> **Status do projeto:** Fases 0, 1, 2 e 4 concluídas (v0.5.0). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
+> **Resumo em 30 segundos:** 24 cenários em Gherkin, 20 passaram e 4 falharam, por causa de **2 bugs** ([BUG-001](bugs/BUG-001.md), alta: frete cobrado com subtotal de R$ 200,00, e [BUG-002](bugs/BUG-002.md), média: API aceita mais de 5 unidades). A automação Playwright cobre 3 cenários e roda verde. Histórico em [CHANGELOG](CHANGELOG.md).
 
 ## Visão geral
 
@@ -25,7 +25,20 @@ A entrega adiciona à loja a aplicação de cupons no carrinho e a regra de fret
 - Máximo de 5 unidades por produto, na interface e na API.
 - Valores arredondados em 2 casas. `total = subtotal - desconto + frete`.
 
-## Entregas
+## Resultado da validação
+
+| Métrica | Valor |
+|---|---|
+| Cenários planejados e executados | 24 |
+| Passou | 20 |
+| Falhou | 4 (CT-08, CT-09, CT-20 e CT-21) |
+| Bloqueado | 0 |
+| Bugs | 2 (1 alta, 1 média) |
+| Testes automatizados | 5 testes em 3 cenários, suíte verde |
+
+Recomendação: corrigir o BUG-001 antes de liberar a entrega, pois afeta exatamente o valor mais divulgado da promoção ("a partir de R$ 200,00"). Detalhes em [`docs/evidencias.md`](docs/evidencias.md).
+
+## Onde encontrar cada entrega
 
 Cada item do desafio e o lugar onde ele está:
 
@@ -36,7 +49,7 @@ Cada item do desafio e o lugar onde ele está:
 | 3 | Report de bugs | [`bugs/`](bugs/) | Concluído (2 bugs) |
 | 4 | Documento de evidências | [`docs/evidencias.md`](docs/evidencias.md) e [`evidencias/`](evidencias/) | Concluído |
 | 5 | Automação com Playwright | [`automacao/`](automacao/) | Concluído (3 cenários, 5 testes) |
-| 6 | README | Este arquivo | Em andamento |
+| 6 | README | Este arquivo | Concluído |
 
 Documentos de apoio:
 
@@ -59,8 +72,8 @@ Documentos de apoio:
 ├── cenarios/                   arquivos .feature (Gherkin, em português)
 ├── execucao/
 │   └── resultados.md           resultado de cada cenário e sessões exploratórias
-├── bugs/                       um arquivo por bug (BUG-001.md ...)
-├── evidencias/                 prints e gravações nomeados por ID (CT-08_...)
+├── bugs/                       um arquivo por bug (BUG-001.md ...), resumo e modelo
+├── evidencias/                 saídas de curl, textos da UI e prints, nomeados por ID (CT-08_...)
 └── automacao/                  Playwright + TypeScript
     ├── playwright.config.ts
     ├── package.json
@@ -74,7 +87,7 @@ Documentos de apoio:
 - **24 cenários** priorizados (P1 a P3), cobrindo cupom, frete grátis, quantidade máxima, checkout, API e consistência entre UI e API.
 - **Técnicas:** partição de equivalência, análise de valor limite (subtotal 199,90, 200,00 e 229,90, já que o catálogo não permite 199,99 e 200,01; quantidade 0, 1, 5 e 6), tabela de decisão e transição de estados.
 - **Gherkin em português**, com Esquema do Cenário para casos de limite, e tags `@smoke`, `@regressao`, `@api`, `@ui`, `@automatizado` e `@P1` a `@P3`.
-- **Execução:** manual guiada pelos cenários, 2 sessões exploratórias de 30 minutos e testes de API com `curl`, com poucas requisições.
+- **Execução:** manual guiada pelos cenários, 2 sessões exploratórias com charter e testes de API com `curl`, com poucas requisições.
 - **Automação:** 3 cenários de maior valor para o negócio, escolhidos por cobrirem o coração da entrega: **CT-01** (aplicar cupom válido, UI), **CT-08** (limite do frete grátis, UI, 3 valores) e **CT-18** (cálculo da API com cupom e frete). Bugs conhecidos ficam como `test.fail` com o ID do bug.
 
 ## Como rodar a automação
@@ -129,19 +142,26 @@ A suíte fica **verde** (`5 passed`). O teste do limite de R$ 200,00 falha de pr
 - Ambiente compartilhado: 1 worker, sem repetições e sem loops de requisições.
 - Relatório HTML em `automacao/playwright-report/`, com trace e screenshot em caso de falha.
 
-**Cuidados com o ambiente compartilhado:** a suíte roda com 1 worker, sem loops de requisições, e cada teste usa um contexto de navegador novo, então tem carrinho próprio e não interfere em outras pessoas.
 
 ## Premissas e interpretações
 
 - O que a seção "Sobre este ambiente" descreve como simplificação de propósito **não é reportado como bug**: carrinho só na aba, pedidos fictícios sem consulta, sem e-mail, cobrança ou estoque, e API sem estado.
 - Testes de carga, estresse e segurança estão fora do escopo, assim como login, cadastro, pagamento online e consulta de pedidos.
-- Onde a documentação é ambígua, a interpretação adotada está registrada em [`docs/ambiguidades.md`](docs/ambiguidades.md).
+- Onde a documentação é ambígua, a interpretação adotada está registrada em [`docs/ambiguidades.md`](docs/ambiguidades.md). As principais:
+  - O carrinho e o cupom devem persistir ao recarregar a mesma aba (confirmado).
+  - Ao tentar passar de 5 unidades, qualquer feedback claro vale, desde que a quantidade nunca passe de 5 (a UI desabilita o botão e avisa).
+  - O arredondamento é comercial, em 2 casas. Com 10% de desconto ele nunca é exercido, pois todo subtotal é múltiplo de R$ 0,10.
+  - Remover item ou cupom recalcula desconto e frete sobre o novo subtotal.
+  - O "faltante para frete grátis" usa o subtotal antes do desconto.
+- Os valores limite de R$ 199,99 e R$ 200,01 não podem ser montados com o catálogo fixo. Foram usados R$ 199,90, R$ 200,00 e R$ 229,90.
 
 ## Limitações
 
 - O trabalho é uma amostra priorizada, não uma cobertura exaustiva. Navegadores e dispositivos são testados de forma pontual.
 - Acessibilidade e responsividade têm checagem básica, sem ferramentas automatizadas completas.
+- A automação cobre só 3 cenários, por decisão de priorizar o que mais importa. Os demais 21 foram executados manualmente.
 - Os testes dependem da disponibilidade da loja pública e de comportamento estável dela.
+- Os testes de UI manuais foram feitos no Chromium embutido do app, não em vários navegadores.
 - As 2 sessões exploratórias foram mais curtas que os 30 minutos planejados e não foram cronometradas. A UI foi testada no Chromium embutido do app, com evidências em texto (DOM) e poucos prints, sem gravação de vídeo.
 - Não foram feitos testes de carga, estresse ou segurança, por determinação do desafio.
 
