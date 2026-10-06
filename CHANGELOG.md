@@ -6,6 +6,16 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 
 ## [Não lançado]
 
+## [0.3.0] - 2026-10-06
+
+### Adicionado
+- Fase 1: 24 cenários em Gherkin (português) em `cenarios/`, em 5 arquivos `.feature`, com tags de tipo, suíte, prioridade, automação e ID (`@CT-NN`).
+- Matriz de rastreabilidade completa e tabela de cobertura por critério.
+- Nota sobre valores limite em `docs/estrategia-de-testes.md`.
+
+### Alterado
+- Valores limite do frete passaram de 199,99 e 200,01 para 199,90, 200,00 e 229,90, pois o catálogo não permite os originais.
+
 ## [0.2.0] - 2026-10-06
 
 ### Adicionado
@@ -25,6 +35,7 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 - Documentos de apoio com cabeçalho e plano: `docs/ambiguidades.md`, `docs/estrategia-de-testes.md`, `docs/matriz-rastreabilidade.md`, `docs/evidencias.md` e `execucao/resultados.md`.
 - Enunciado do desafio em `docs/enunciado-teste-tecnico-qa-junior.pdf`.
 
-[Não lançado]: ../../compare/v0.2.0...develop
+[Não lançado]: ../../compare/v0.3.0...develop
+[0.3.0]: ../../releases/tag/v0.3.0
 [0.2.0]: ../../releases/tag/v0.2.0
 [0.1.0]: ../../releases/tag/v0.1.0
