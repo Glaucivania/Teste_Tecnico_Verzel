@@ -18,7 +18,7 @@ Funcionalidade: API de produtos, cálculo de carrinho e pedidos
     Resultado da execução: Falhou em duas linhas: 6 unidades em calcular respondeu 200 e 6 unidades em pedidos
     respondeu 201 (VZ-737777), em vez de 422 (BUG-002). As demais passaram.
     A quantidade 1000000 também foi aceita em calcular (sessão exploratória SE-02).
-    Evidência: evidencias/CT-17_quantidade-6.png.
+    Evidência: evidencias/CT-17_quantidade-6.jpeg.
 
     Quando envio <requisicao>
     Então o status é <status> e o código de erro é "<codigo>"

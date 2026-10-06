@@ -15,7 +15,7 @@ Funcionalidade: API de produtos, cálculo de carrinho e pedidos
 
   @CT-14 @smoke @regressao @api @P1 @automatizado
   Cenário: CT-14 Calcular um carrinho com BEMVINDO10 (exemplo da documentação)
-    Resultado da execução: Passou. Evidência: evidencias/CT-14_calcular-bemvindo10.png.
+    Resultado da execução: Passou. Evidência: evidencias/CT-14_calcular-bemvindo10.jpeg.
     Automatizado em automacao/tests/calculo.api.spec.ts.
 
     Quando envio "POST {{base}}/carrinho/calcular" com o corpo

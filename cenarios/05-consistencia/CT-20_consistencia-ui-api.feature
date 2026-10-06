@@ -10,6 +10,7 @@ Funcionalidade: Consistência entre interface e API
     Resultado da execução: Passou. Evidência: evidencias/CT-20_consistencia-ui-vs-api.png.
     As duas camadas são iguais entre si, inclusive no erro do limite de R$ 200,00 (BUG-001),
     que é coberto pelos cenários CT-06, CT-07 e CT-16.
+    As requisições da API estão na pasta "CT-20 Consistência UI e API" da coleção do Postman.
 
     Dado que abri uma nova aba na loja
     E que montei o carrinho com <itens> e apliquei o cupom "<cupom>", quando houver

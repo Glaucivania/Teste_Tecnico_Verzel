@@ -17,7 +17,7 @@ Funcionalidade: API de produtos, cálculo de carrinho e pedidos
   Esquema do Cenário: CT-16 Limite do frete grátis na API (CA06, CA07)
     Resultado da execução: Falhou no subtotal de R$ 200,00 (BUG-001), também com o cupom BEMVINDO10
     (frete 19.9 e total 199.9, esperado 0 e 180). Passou em 199,90 e em 229,90.
-    Evidência: evidencias/CT-16_calcular-200-00.png.
+    Evidência: evidencias/CT-16_calcular-200-00.jpeg.
 
     Quando envio "POST {{base}}/carrinho/calcular", sem cupom, com <itens>
     Então o status é 200

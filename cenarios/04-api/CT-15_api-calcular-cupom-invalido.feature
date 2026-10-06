@@ -15,7 +15,7 @@ Funcionalidade: API de produtos, cálculo de carrinho e pedidos
 
   @CT-15 @regressao @api @P1
   Esquema do Cenário: CT-15 Calcular com cupom inválido ou expirado não gera erro (CA03, CA04)
-    Resultado da execução: Passou. Evidência: evidencias/CT-15_calcular-cupom-expirado.png.
+    Resultado da execução: Passou. Evidência: evidencias/CT-15_calcular-cupom-expirado.jpeg.
     Com subtotal 200 a API cobrou frete 19.9, o que é o BUG-001 e não afeta este cenário.
 
     Quando envio "POST {{base}}/carrinho/calcular" com 2 "P005" e o cupom "<cupom>"

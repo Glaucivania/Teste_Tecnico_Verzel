@@ -15,7 +15,7 @@ Funcionalidade: API de produtos, cálculo de carrinho e pedidos
 
   @CT-13 @smoke @regressao @api @P2
   Cenário: CT-13 Listar produtos e consultar um produto
-    Resultado da execução: Passou. Evidência: evidencias/CT-13_produtos-lista.png.
+    Resultado da execução: Passou. Evidência: evidencias/CT-13_produtos-lista.jpeg.
 
     Quando envio "GET {{base}}/produtos"
     Então o status é 200 e a lista tem 8 produtos, de P001 a P008

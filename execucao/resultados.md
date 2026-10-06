@@ -31,13 +31,13 @@ Bugs encontrados: [BUG-001](../bugs/BUG-001.md) (frete cobrado no subtotal de R$
 | CT-10 | Checkout válido | Passou | 2026-10-06 | Google Chrome 153 | [CT-10_checkout-ui.png](../evidencias/CT-10_checkout-ui.png) |  |
 | CT-11 | Validação de nome, e-mail e CEP | Passou | 2026-10-06 | Google Chrome 153 | [CT-11_validacao-checkout-ui.png](../evidencias/CT-11_validacao-checkout-ui.png) |  |
 | CT-12 | Responsividade e acessibilidade básica | Passou | 2026-10-06 | Google Chrome 153 (desktop e viewport de 375 px) | [CT-12_responsividade-e-acessibilidade.png](../evidencias/CT-12_responsividade-e-acessibilidade.png) |  |
-| CT-13 | API: produtos | Passou | 2026-10-06 | Postman | [CT-13_produtos-lista.png](../evidencias/CT-13_produtos-lista.png) |  |
-| CT-14 | API: calcular com BEMVINDO10 | Passou | 2026-10-06 | Postman | [CT-14_calcular-bemvindo10.png](../evidencias/CT-14_calcular-bemvindo10.png) |  |
-| CT-15 | API: calcular com cupom inválido ou expirado | Passou | 2026-10-06 | Postman | [CT-15_calcular-cupom-expirado.png](../evidencias/CT-15_calcular-cupom-expirado.png) |  |
-| CT-16 | API: limite do frete | Falhou | 2026-10-06 | Postman | [CT-16_calcular-200-00.png](../evidencias/CT-16_calcular-200-00.png) | BUG-001 |
-| CT-17 | API: erros 4xx | Falhou | 2026-10-06 | Postman | [CT-17_quantidade-6.png](../evidencias/CT-17_quantidade-6.png) | BUG-002 |
-| CT-18 | API: pedidos | Passou | 2026-10-06 | Postman | [CT-18_pedido-bemvindo10.png](../evidencias/CT-18_pedido-bemvindo10.png) |  |
-| CT-19 | API: pedidos com cliente inválido | Passou | 2026-10-06 | Postman | [CT-19_nome-sem-sobrenome.png](../evidencias/CT-19_nome-sem-sobrenome.png) |  |
+| CT-13 | API: produtos | Passou | 2026-10-06 | Postman | [CT-13_produtos-lista.jpeg](../evidencias/CT-13_produtos-lista.jpeg) |  |
+| CT-14 | API: calcular com BEMVINDO10 | Passou | 2026-10-06 | Postman | [CT-14_calcular-bemvindo10.jpeg](../evidencias/CT-14_calcular-bemvindo10.jpeg) |  |
+| CT-15 | API: calcular com cupom inválido ou expirado | Passou | 2026-10-06 | Postman | [CT-15_calcular-cupom-expirado.jpeg](../evidencias/CT-15_calcular-cupom-expirado.jpeg) |  |
+| CT-16 | API: limite do frete | Falhou | 2026-10-06 | Postman | [CT-16_calcular-200-00.jpeg](../evidencias/CT-16_calcular-200-00.jpeg) | BUG-001 |
+| CT-17 | API: erros 4xx | Falhou | 2026-10-06 | Postman | [CT-17_quantidade-6.jpeg](../evidencias/CT-17_quantidade-6.jpeg) | BUG-002 |
+| CT-18 | API: pedidos | Passou | 2026-10-06 | Postman | [CT-18_pedido-bemvindo10.jpeg](../evidencias/CT-18_pedido-bemvindo10.jpeg) |  |
+| CT-19 | API: pedidos com cliente inválido | Passou | 2026-10-06 | Postman | [CT-19_nome-sem-sobrenome.jpeg](../evidencias/CT-19_nome-sem-sobrenome.jpeg) |  |
 | CT-20 | Consistência UI x API | Passou | 2026-10-06 | Google Chrome 153 e Postman | [CT-20_consistencia-ui-vs-api.png](../evidencias/CT-20_consistencia-ui-vs-api.png) |  |
 
 ## Observações
@@ -54,7 +54,7 @@ Bugs encontrados: [BUG-001](../bugs/BUG-001.md) (frete cobrado no subtotal de R$
 
 Em 2026-10-06, os cenários de UI (CT-01 a CT-12 e CT-20) foram reexecutados no **Google Chrome 153** e os resultados foram os mesmos da rodada inicial no Chromium embutido do app Claude: 16 passaram e 4 falharam, e o BUG-001 foi reproduzido na UI e na API.
 
-Cada cenário tem **uma imagem** de evidência: capturas do Google Chrome 153 para a UI e a requisição com a resposta para a API.
+Cada cenário tem **uma imagem** de evidência: capturas do Google Chrome 153 para a UI e capturas do Postman para a API (com a aba Test Results).
 
 A suíte Playwright (CT-01, CT-06 e CT-14) foi executada no **Google Chrome 153.0.8010.54** (canal `chrome`), com 1 worker: 5 testes, `5 passed`, sendo o caso de R$ 200,00 do CT-06 um `test.fail` do BUG-001.
 

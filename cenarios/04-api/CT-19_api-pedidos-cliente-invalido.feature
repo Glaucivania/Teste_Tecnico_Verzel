@@ -15,7 +15,7 @@ Funcionalidade: API de produtos, cálculo de carrinho e pedidos
 
   @CT-19 @regressao @api @P2
   Esquema do Cenário: CT-19 Pedido com dados do cliente inválidos
-    Resultado da execução: Passou. Evidência: evidencias/CT-19_nome-sem-sobrenome.png.
+    Resultado da execução: Passou. Evidência: evidencias/CT-19_nome-sem-sobrenome.jpeg.
 
     Quando envio "POST {{base}}/pedidos" com 1 "P005", nome "<nome>", e-mail "<email>" e CEP "<cep>"
     Então o status é 422 e o código é "DADOS_INVALIDOS"
