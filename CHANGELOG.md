@@ -6,6 +6,12 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 
 ## [Não lançado]
 
+## [0.3.2] - 2026-10-06
+
+### Alterado
+- Cenários Gherkin voltaram para o português (`# language: pt`, `Funcionalidade`, `Cenário`, `Esquema do Cenário`, `Dado`, `Quando`, `Então`).
+- Tags voltaram a `@regressao` e `@automatizado`, e as de contexto a `@cupom`, `@frete`, `@carrinho`, `@consistencia`.
+
 ## [0.3.1] - 2026-10-06
 
 ### Alterado
@@ -42,7 +48,8 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 - Documentos de apoio com cabeçalho e plano: `docs/ambiguidades.md`, `docs/estrategia-de-testes.md`, `docs/matriz-rastreabilidade.md`, `docs/evidencias.md` e `execucao/resultados.md`.
 - Enunciado do desafio em `docs/enunciado-teste-tecnico-qa-junior.pdf`.
 
-[Não lançado]: ../../compare/v0.3.1...develop
+[Não lançado]: ../../compare/v0.3.2...develop
+[0.3.2]: ../../releases/tag/v0.3.2
 [0.3.1]: ../../releases/tag/v0.3.1
 [0.3.0]: ../../releases/tag/v0.3.0
 [0.2.0]: ../../releases/tag/v0.2.0
