@@ -2,7 +2,7 @@
 
 Validação de QA da entrega **VZS-142 (v2.3.0): cupom de desconto e frete grátis** da Verzel Store, uma loja fictícia usada como ambiente de teste.
 
-> **Status do projeto:** estrutura criada (v0.1.0). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
+> **Status do projeto:** Fase 0 concluída (v0.2.0). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
 
 ## Visão geral
 
