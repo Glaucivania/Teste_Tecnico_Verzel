@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "itens": [
+        {
+          "produtoId": "P008",
+          "quantidade": 4
+        }
+      ],
+      "cupom": "BEMVINDO10"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 200", () => pm.response.to.have.status(200));
+      pm.test("frete 0, freteGratis true, total 180 (BUG-001)", () => { const j = pm.response.json(); pm.expect(j.frete).to.eql(0); pm.expect(j.freteGratis).to.eql(true); pm.expect(j.valorFaltanteFreteGratis).to.eql(0); pm.expect(j.total).to.eql(180); });
+    language: text/javascript
+order: 3000

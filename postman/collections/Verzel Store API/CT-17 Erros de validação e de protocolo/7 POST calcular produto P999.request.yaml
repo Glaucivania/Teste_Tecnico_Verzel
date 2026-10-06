@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "itens": [
+        {
+          "produtoId": "P999",
+          "quantidade": 1
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 422", () => pm.response.to.have.status(422));
+      pm.test("erro.codigo PRODUTO_NAO_ENCONTRADO", () => pm.expect(pm.response.json().erro.codigo).to.eql("PRODUTO_NAO_ENCONTRADO"));
+    language: text/javascript
+order: 7000

@@ -1,0 +1,11 @@
+$kind: http-request
+name: GET produtos/P999
+url: "{{base}}/produtos/P999"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 404", () => pm.response.to.have.status(404));
+      pm.test("erro.codigo PRODUTO_NAO_ENCONTRADO", () => pm.expect(pm.response.json().erro.codigo).to.eql("PRODUTO_NAO_ENCONTRADO"));
+    language: text/javascript
+order: 3000

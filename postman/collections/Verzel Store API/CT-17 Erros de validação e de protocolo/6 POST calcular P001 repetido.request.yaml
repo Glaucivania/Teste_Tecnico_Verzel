@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "itens": [
+        {
+          "produtoId": "P001",
+          "quantidade": 1
+        },
+        {
+          "produtoId": "P001",
+          "quantidade": 1
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 422", () => pm.response.to.have.status(422));
+      pm.test("erro.codigo ITEM_DUPLICADO", () => pm.expect(pm.response.json().erro.codigo).to.eql("ITEM_DUPLICADO"));
+    language: text/javascript
+order: 6000

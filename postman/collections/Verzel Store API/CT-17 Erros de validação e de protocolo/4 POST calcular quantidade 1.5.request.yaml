@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{ "itens": [ { "produtoId": "P001", "quantidade": 1.5 } ] }'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 422", () => pm.response.to.have.status(422));
+      pm.test("erro.codigo QUANTIDADE_INVALIDA", () => pm.expect(pm.response.json().erro.codigo).to.eql("QUANTIDADE_INVALIDA"));
+    language: text/javascript
+order: 4000

@@ -1,0 +1,4 @@
+$kind: collection
+description: "Testes de API da entrega VZS-142 (cupom e frete grátis). Cenários CT-13 a CT-20. Os testes verificam o resultado esperado pela documentação: os que falham (BUG-001 e BUG-002) reproduzem os bugs."
+variables:
+  base: https://verzel-store.qa-test-verzel-store.workers.dev/api

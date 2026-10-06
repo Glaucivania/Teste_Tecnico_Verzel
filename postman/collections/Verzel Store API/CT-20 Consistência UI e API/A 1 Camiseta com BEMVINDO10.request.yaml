@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "itens": [
+        {
+          "produtoId": "P001",
+          "quantidade": 1
+        }
+      ],
+      "cupom": "BEMVINDO10"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 200", () => pm.response.to.have.status(200));
+      pm.test("API igual ao resumo da tela (subtotal 59,90, desconto 5,99, frete 19,90, total 73,81)", () => { const j = pm.response.json(); pm.expect(j.subtotal).to.eql(59.9); pm.expect(j.desconto).to.eql(5.99); pm.expect(j.frete).to.eql(19.9); pm.expect(j.total).to.eql(73.81); });
+      pm.test("freteGratis false e faltante 140.1, como o aviso da tela", () => { const j = pm.response.json(); pm.expect(j.freteGratis).to.eql(false); pm.expect(j.valorFaltanteFreteGratis).to.eql(140.1); });
+    language: text/javascript
+order: 1000

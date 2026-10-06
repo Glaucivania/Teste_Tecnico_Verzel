@@ -1,0 +1,7 @@
+node_modules/
+automacao/playwright-report/
+automacao/test-results/
+automacao/blob-report/
+.env
+.DS_Store
+Thumbs.db
