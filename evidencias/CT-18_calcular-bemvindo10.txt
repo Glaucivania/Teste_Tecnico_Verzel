@@ -1,0 +1,6 @@
+# 2026-10-06T15:31:02Z
+POST /api/carrinho/calcular
+Body: {"itens":[{"produtoId":"P002","quantidade":1},{"produtoId":"P004","quantidade":2}],"cupom":"BEMVINDO10"}
+---
+{"itens":[{"produtoId":"P002","nome":"Calça Jeans Slim","precoUnitario":139.9,"quantidade":1,"total":139.9},{"produtoId":"P004","nome":"Boné Aba Curva","precoUnitario":49.9,"quantidade":2,"total":99.8}],"subtotal":239.7,"desconto":23.97,"frete":0,"freteGratis":true,"valorFaltanteFreteGratis":0,"total":215.73,"cupom":{"codigo":"BEMVINDO10","aplicado":true,"mensagem":"Cupom aplicado: 10% de desconto nos produtos."}}
+HTTP 200

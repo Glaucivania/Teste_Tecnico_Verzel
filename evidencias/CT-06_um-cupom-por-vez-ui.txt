@@ -1,0 +1,5 @@
+Execução manual na UI, 2026-10-06, Chromium embutido do app Claude (desktop). Texto da região <main> lido do DOM.
+
+Após aplicar BEMVINDO10, os controles disponíveis são: Esvaziar carrinho; Diminuir; Aumentar; Remover; Remover cupom.
+O campo de cupom deixa de existir (campo-cupom presente: false), então não é possível aplicar um segundo cupom nem reaplicar o mesmo sem remover o atual (CA05).
+Observação: com o campo oculto, a reaplicação do mesmo cupom não é possível pela UI. O desconto permanece - R$ 5,99.

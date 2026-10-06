@@ -1,0 +1,7 @@
+Execução manual na UI, 2026-10-06, Chromium embutido do app Claude (desktop). Texto da região <main> lido do DOM.
+
+1x Camiseta Essencial com BEMVINDO10; botão + clicado 5 vezes.
+Quantidades 2, 3, 4, 5 calculadas corretamente (ex.: 4 un: Subtotal R$ 239,60, Frete Grátis, Total R$ 215,64).
+Em 5 un: aparece "Limite de 5 unidades por produto." e o botão Aumentar fica desabilitado. Total R$ 269,55.
+Em 1 un: o botão Diminuir fica desabilitado.
+A UI não permite chegar a 6, então o caso "6" está coberto pela API (veja BUG-002).

@@ -1,0 +1,36 @@
+Execução manual na UI, 2026-10-06, Chromium embutido do app Claude (desktop). Texto da região <main> lido do DOM.
+
+Comparativo UI x API (POST /api/carrinho/calcular), mesmo carrinho.
+
+CT-08 subtotal 199,90 (1x P004 + 3x P008)
+  UI : Subtotal R$ 199,90 | Frete R$ 19,90 | Total R$ 219,80 | Faltam R$ 0,10 para o frete grátis.
+  API: subtotal 199.9, frete 19.9, freteGratis false, valorFaltanteFreteGratis 0.1, total 219.8      -> OK
+
+CT-08 subtotal 200,00 (4x P008)
+  UI : Subtotal R$ 200,00 | Frete R$ 19,90 | Total R$ 219,90 | Faltam R$ 0,00 para o frete grátis.
+  API: subtotal 200, frete 19.9, freteGratis false, valorFaltanteFreteGratis 0, total 219.9          -> FALHA (BUG-001)
+  Esperado (CA06): Frete Grátis | Total R$ 200,00
+
+CT-08 subtotal 229,90 (1x P007)
+  UI : Frete Grátis | Total R$ 229,90
+  API: frete 0, freteGratis true, total 229.9                                                         -> OK
+
+CT-09 subtotal 200,00 + BEMVINDO10
+  UI : Desconto - R$ 20,00 | Frete R$ 19,90 | Total R$ 199,90 | Faltam R$ 0,00 para o frete grátis.
+  API: desconto 20, frete 19.9, freteGratis false, total 199.9                                        -> FALHA (BUG-001)
+  Esperado (CA06 e CA08): Frete Grátis | Total R$ 180,00
+
+CT-10 1x P005 + BEMVINDO10
+  UI : Subtotal R$ 100,00 | Desconto - R$ 10,00 | Frete R$ 19,90 | Total R$ 109,90
+  API: subtotal 100, desconto 10, frete 19.9, total 109.9                                             -> OK (desconto não incide no frete)
+
+CT-11 arredondamento com BEMVINDO10
+  3x P001: UI Subtotal R$ 179,70 | Desconto - R$ 17,97 | Total R$ 181,63 ; API 179.7 / 17.97 / 181.63  -> OK
+  3x P004: UI Subtotal R$ 149,70 | Desconto - R$ 14,97 | Total R$ 154,63 ; API 149.7 / 14.97 / 154.63  -> OK
+  3x P006: UI Subtotal R$ 89,70  | Desconto - R$ 8,97  | Total R$ 100,63 ; API 89.7 / 8.97 / 100.63    -> OK
+
+CT-24 consistência
+  1x P001 + cupom: UI = API (73,81)            -> OK
+  4x P008 sem cupom: UI = API (219,90)         -> OK (iguais entre si, ambos violam o CA06)
+  4x P008 + cupom: UI = API (199,90)           -> OK (iguais entre si, ambos violam o CA06)
+  1x P007 + cupom: UI = API (206,91)           -> OK

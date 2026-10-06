@@ -1,0 +1,6 @@
+# 2026-10-06T15:31:02Z
+POST /api/carrinho/calcular
+Body: {"itens":[{"produtoId":"P005","quantidade":2}],"cupom":"INEXISTENTE"}
+---
+{"itens":[{"produtoId":"P005","nome":"Mochila Urbana 20L","precoUnitario":100,"quantidade":2,"total":200}],"subtotal":200,"desconto":0,"frete":19.9,"freteGratis":false,"valorFaltanteFreteGratis":0,"total":219.9,"cupom":{"codigo":"INEXISTENTE","aplicado":false,"mensagem":"Cupom inválido."}}
+HTTP 200

@@ -1,0 +1,6 @@
+# 2026-10-06T15:31:20Z
+POST /api/pedidos
+Body: {"cliente":{"nome":"Maria Silva","email":"maria@exemplo.com","cep":"0131010"},"itens":[{"produtoId":"P005","quantidade":1}]}
+---
+{"erro":{"codigo":"DADOS_INVALIDOS","mensagem":"Existem campos inválidos no pedido.","campos":[{"campo":"cliente.cep","mensagem":"Informe um CEP com 8 dígitos."}]}}
+HTTP 422

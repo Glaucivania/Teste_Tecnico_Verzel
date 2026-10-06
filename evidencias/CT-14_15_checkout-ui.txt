@@ -1,0 +1,12 @@
+Execução manual na UI, 2026-10-06, Chromium embutido do app Claude (desktop). Texto da região <main> lido do DOM.
+
+CT-14 1x Mochila Urbana 20L, Maria Silva / maria@exemplo.com / 01310-100:
+  /pedido-confirmado | Pedido VZ-930002 | Subtotal R$ 100,00 | Frete R$ 19,90 | Total R$ 119,90   -> OK
+CT-15 validações:
+  Maria                 -> bloqueado: "Informe nome e sobrenome."
+  e-mail maria@exemplo  -> bloqueado: "Informe um e-mail válido."
+  CEP 0131010 (7)       -> bloqueado: "Informe um CEP com 8 dígitos."
+  CEP 013101000 (9)     -> bloqueado: "Informe um CEP com 8 dígitos."
+  CEP 01310-100         -> aceito (Pedido VZ-930002)
+  CEP 01310100          -> aceito (Pedido VZ-998348)
+Extra: pedido com 4x Garrafa (R$ 200,00) + BEMVINDO10 confirmado com Frete R$ 19,90 e Total R$ 199,90 (Pedido VZ-873332). O BUG-001 chega ao pedido.

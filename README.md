@@ -2,7 +2,7 @@
 
 Validação de QA da entrega **VZS-142 (v2.3.0): cupom de desconto e frete grátis** da Verzel Store, uma loja fictícia usada como ambiente de teste.
 
-> **Status do projeto:** Fase 1 concluída (v0.3.2). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
+> **Status do projeto:** Fases 0 a 2 concluídas (v0.4.0). Cenários, execução, bugs e automação serão preenchidos fase a fase. Veja o [CHANGELOG](CHANGELOG.md) para o andamento e a seção [Entregas](#onde-encontrar-cada-entrega) para o estado de cada item.
 
 ## Visão geral
 
@@ -32,9 +32,9 @@ Cada item do desafio e o lugar onde ele está:
 | # | Entrega | Onde encontrar | Estado |
 |---|---|---|---|
 | 1 | Cenários de teste (Gherkin) | [`cenarios/`](cenarios/) e [`docs/matriz-rastreabilidade.md`](docs/matriz-rastreabilidade.md) | Concluído |
-| 2 | Execução (manual e exploratória) | [`execucao/resultados.md`](execucao/resultados.md) | Pendente |
-| 3 | Report de bugs | [`bugs/`](bugs/) | Pendente |
-| 4 | Documento de evidências | [`docs/evidencias.md`](docs/evidencias.md) e [`evidencias/`](evidencias/) | Pendente |
+| 2 | Execução (manual e exploratória) | [`execucao/resultados.md`](execucao/resultados.md) | Concluído (20 passaram, 4 falharam) |
+| 3 | Report de bugs | [`bugs/`](bugs/) | Concluído (2 bugs) |
+| 4 | Documento de evidências | [`docs/evidencias.md`](docs/evidencias.md) e [`evidencias/`](evidencias/) | Concluído |
 | 5 | Automação com Playwright | [`automacao/`](automacao/) | Pendente |
 | 6 | README | Este arquivo | Em andamento |
 
@@ -121,6 +121,7 @@ npm run test:headed  # com o navegador visível
 - O trabalho é uma amostra priorizada, não uma cobertura exaustiva. Navegadores e dispositivos são testados de forma pontual.
 - Acessibilidade e responsividade têm checagem básica, sem ferramentas automatizadas completas.
 - Os testes dependem da disponibilidade da loja pública e de comportamento estável dela.
+- As 2 sessões exploratórias foram mais curtas que os 30 minutos planejados e não foram cronometradas. A UI foi testada no Chromium embutido do app, com evidências em texto (DOM) e poucos prints, sem gravação de vídeo.
 - Não foram feitos testes de carga, estresse ou segurança, por determinação do desafio.
 
 ## Fluxo de trabalho (Git)

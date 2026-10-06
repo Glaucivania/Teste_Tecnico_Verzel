@@ -1,0 +1,4 @@
+Execução manual na UI, 2026-10-06, Chromium embutido do app Claude (desktop). Texto da região <main> lido do DOM.
+
+Cupom "bemvindo10", "BemVindo10" e "   BEMVINDO10   " com 1x Camiseta Essencial.
+Os 3 resultaram em: Desconto (BEMVINDO10) - R$ 5,99 | Total R$ 73,81.
