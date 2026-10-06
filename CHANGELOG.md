@@ -4,6 +4,21 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio.
 
+## [0.7.0] - 2026-10-06
+
+### Adicionado
+- Workspace do Postman versionado em `postman/` e `.postman/`, para a coleção dos testes de API.
+- Cenários Gherkin organizados em um arquivo por cenário (CT-01 a CT-20), em subpastas numeradas por tema, com o passo a passo manual de cada teste e índice em `cenarios/README.md`.
+- Evidências em imagem, uma por cenário, sem texto sobreposto.
+
+### Alterado
+- Fusão de cenários redundantes, de 24 para 20. Resultado da execução: 16 passaram e 4 falharam (CT-06, CT-07, CT-16 e CT-17), por 2 bugs.
+- Automação Playwright passa a rodar a UI no Google Chrome instalado (canal `chrome`), com `PW_BROWSER=chromium` como alternativa. Configuração reescrita (o `testIdAttribute` estava duplicado no projeto `ui`).
+- Ferramenta dos cenários de API registrada como Postman.
+
+### Removido
+- Enunciado em PDF (`docs/enunciado-teste-tecnico-qa-junior.pdf`).
+
 ## [0.6.0] - 2026-10-06
 
 ### Adicionado
@@ -76,6 +91,7 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 - Documentos de apoio com cabeçalho e plano: `docs/ambiguidades.md`, `docs/estrategia-de-testes.md`, `docs/matriz-rastreabilidade.md`, `docs/evidencias.md` e `execucao/resultados.md`.
 - Enunciado do desafio em `docs/enunciado-teste-tecnico-qa-junior.pdf`.
 
+[0.7.0]: ../../releases/tag/v0.7.0
 [0.6.0]: ../../releases/tag/v0.6.0
 [0.5.0]: ../../releases/tag/v0.5.0
 [0.4.0]: ../../releases/tag/v0.4.0
