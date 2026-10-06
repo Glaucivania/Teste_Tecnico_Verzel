@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{base}}/carrinho/calcular"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "itens": [
+        {
+          "produtoId": "P008",
+          "quantidade": 4
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("status 200", () => pm.response.to.have.status(200));
+      pm.test("API igual ao resumo da tela (subtotal 200, desconto 0, frete 19,90, total 219,90)", () => { const j = pm.response.json(); pm.expect(j.subtotal).to.eql(200); pm.expect(j.desconto).to.eql(0); pm.expect(j.frete).to.eql(19.9); pm.expect(j.total).to.eql(219.9); });
+      pm.test("freteGratis false e faltante 0, como o aviso da tela (o frete em R$ 200,00 e o BUG-001, coberto no CT-06, CT-07 e CT-16)", () => { const j = pm.response.json(); pm.expect(j.freteGratis).to.eql(false); pm.expect(j.valorFaltanteFreteGratis).to.eql(0); });
+    language: text/javascript
+order: 2000
