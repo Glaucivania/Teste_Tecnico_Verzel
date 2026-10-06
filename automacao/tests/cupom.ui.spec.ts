@@ -4,8 +4,8 @@ import { ProductsPage } from '../pages/ProductsPage';
 import { brl, discount } from '../support/money';
 
 test.describe('Cupom de desconto', () => {
-  // CT-01 | CA01 | @smoke @regressao @ui @P1
-  test('CT-01 aplicar BEMVINDO10 dá 10% sobre o subtotal', async ({ page }) => {
+  // CT-01 | CA01, CA02 e CA09 | @smoke @regressao @ui @P1
+  test('CT-01 BEMVINDO10 dá 10% sobre o subtotal e não incide no frete', async ({ page }) => {
     const products = new ProductsPage(page);
     const cart = new CartPage(page);
 

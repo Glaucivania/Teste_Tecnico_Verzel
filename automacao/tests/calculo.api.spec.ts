@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('API de cálculo do carrinho', () => {
-  // CT-18 | CA01 e CA06 | @smoke @regressao @api @P1 (exemplo da documentação)
-  test('CT-18 calcular carrinho com BEMVINDO10', async ({ request }) => {
+  // CT-14 | CA01 e CA06 | @smoke @regressao @api @P1 (exemplo da documentação)
+  test('CT-14 calcular carrinho com BEMVINDO10', async ({ request }) => {
     const response = await request.post('/api/carrinho/calcular', {
       data: {
         itens: [
