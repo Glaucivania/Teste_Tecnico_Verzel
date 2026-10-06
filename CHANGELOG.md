@@ -6,6 +6,15 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 
 ## [Não lançado]
 
+## [0.6.0] - 2026-10-06
+
+### Adicionado
+- Fase 5: seção "Resultado da validação" e "Onde encontrar cada entrega" no README, com recomendação e principais interpretações de ambiguidades.
+- Evidência da automação em `evidencias/AUTO_execucao-playwright.txt` e entrada correspondente em `docs/evidencias.md`.
+
+### Alterado
+- README com resumo no topo, limitações revisadas e premissas detalhadas.
+
 ## [0.5.0] - 2026-10-06
 
 ### Adicionado
@@ -69,7 +78,8 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 - Documentos de apoio com cabeçalho e plano: `docs/ambiguidades.md`, `docs/estrategia-de-testes.md`, `docs/matriz-rastreabilidade.md`, `docs/evidencias.md` e `execucao/resultados.md`.
 - Enunciado do desafio em `docs/enunciado-teste-tecnico-qa-junior.pdf`.
 
-[Não lançado]: ../../compare/v0.5.0...develop
+[Não lançado]: ../../compare/v0.6.0...develop
+[0.6.0]: ../../releases/tag/v0.6.0
 [0.5.0]: ../../releases/tag/v0.5.0
 [0.4.0]: ../../releases/tag/v0.4.0
 [0.3.2]: ../../releases/tag/v0.3.2

@@ -43,6 +43,7 @@ Todos em [`../evidencias/`](../evidencias/).
 | CT-21 | `CT-21_*.txt` | **Falhou** (BUG-002) |
 | CT-22 | `CT-22_*.txt` | Passou |
 | CT-23 | `CT-23_*.txt` | Passou |
+| AUTO | [AUTO_execucao-playwright.txt](../evidencias/AUTO_execucao-playwright.txt) | 5 testes passando, 1 deles `test.fail` do BUG-001 |
 | SE-01 | [SE-01_exploratorio-cupom-e-frete.txt](../evidencias/SE-01_exploratorio-cupom-e-frete.txt) | BUG-001 |
 | SE-02 | [SE-02_api-exploratorio.txt](../evidencias/SE-02_api-exploratorio.txt) | BUG-002 |
 
