@@ -1,6 +1,0 @@
-# 2026-10-06T15:31:17Z
-POST /api/carrinho/calcular
-Body: {"itens":[{"produtoId":"P999","quantidade":1}]}
----
-{"erro":{"codigo":"PRODUTO_NAO_ENCONTRADO","mensagem":"Produto P999 não encontrado.","campo":"itens[0].produtoId"}}
-HTTP 422

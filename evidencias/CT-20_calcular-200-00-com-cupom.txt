@@ -1,6 +1,0 @@
-# 2026-10-06T15:31:04Z
-POST /api/carrinho/calcular
-Body: {"itens":[{"produtoId":"P008","quantidade":4}],"cupom":"BEMVINDO10"}
----
-{"itens":[{"produtoId":"P008","nome":"Garrafa Térmica 750ml","precoUnitario":50,"quantidade":4,"total":200}],"subtotal":200,"desconto":20,"frete":19.9,"freteGratis":false,"valorFaltanteFreteGratis":0,"total":199.9,"cupom":{"codigo":"BEMVINDO10","aplicado":true,"mensagem":"Cupom aplicado: 10% de desconto nos produtos."}}
-HTTP 200

@@ -1,7 +1,0 @@
-Execução manual na UI, 2026-10-06, Chromium embutido do app Claude (desktop). Texto da região <main> lido do DOM.
-
-CT-03 cupom INEXISTENTE: mensagem "Cupom inválido." | Desconto R$ 0,00 | Total R$ 79,80
-CT-04 cupom VERAO2026: mensagem "Cupom expirado." | Desconto R$ 0,00 | Total R$ 79,80
-CT-05 cupom vazio: mensagem "Informe um cupom." | Desconto R$ 0,00
-CT-05 cupom só com espaços: mensagem "Informe um cupom." | Desconto R$ 0,00
-CT-05 carrinho vazio: tela "Seu carrinho está vazio | Escolha um produto na vitrine para começar. | Ver produtos" (sem campo de cupom)

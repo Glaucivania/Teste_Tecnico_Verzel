@@ -6,18 +6,19 @@ Execução de 06/10/2026 na v2.3.0 da Verzel Store. Resultado detalhado por cen�
 
 | Métrica | Valor |
 |---|---|
-| Cenários planejados | 24 |
-| Passou | 20 |
-| Falhou | 4 (CT-08, CT-09, CT-20 e CT-21) |
+| Cenários planejados | 20 |
+| Passou | 16 |
+| Falhou | 4 (CT-06, CT-07, CT-16 e CT-17) |
 | Bloqueado | 0 |
 | Bugs | 2 (1 alta: BUG-001, 1 média: BUG-002) |
 | Sessões exploratórias | 2 (SE-01 e SE-02) |
 
 ## Como as evidências foram coletadas
 
-- **API:** requisições `curl` com data, método, corpo, resposta e status HTTP gravados em `.txt`.
-- **Interface:** texto do DOM da região principal (resumo de valores, mensagens) gravado em `.txt`, mais prints (`.jpg`) dos casos visuais.
-- **Nomes:** `CT-NN_descricao.ext`, conforme o ID do cenário. `SE-NN` para sessões exploratórias.
+Cada cenário tem **uma única imagem** de evidência, sem texto adicional, nomeada `CT-NN_descricao.png`.
+
+- **Interface:** capturas de tela do Google Chrome 153. Nos cenários com vários casos, a imagem reúne as capturas lado a lado, sem legenda.
+- **API:** imagem com a requisição (método, URL e corpo) e a resposta com o status HTTP, a partir de uma chamada real à API. Não são capturas da tela do Postman.
 
 ## Anexos
 
@@ -25,29 +26,29 @@ Todos em [`../evidencias/`](../evidencias/).
 
 | Cenário | Evidência | Resultado |
 |---|---|---|
-| CT-01 | [CT-01_aplicar-bemvindo10-ui.txt](../evidencias/CT-01_aplicar-bemvindo10-ui.txt) | Passou |
-| CT-02 | [CT-02_caixa-e-espacos-ui.txt](../evidencias/CT-02_caixa-e-espacos-ui.txt) | Passou |
-| CT-03, CT-04 e CT-05 | [CT-03-04-05_cupom-invalido-expirado-vazio-ui.txt](../evidencias/CT-03-04-05_cupom-invalido-expirado-vazio-ui.txt) | Passou |
-| CT-06 | [CT-06_um-cupom-por-vez-ui.txt](../evidencias/CT-06_um-cupom-por-vez-ui.txt) | Passou |
-| CT-07 | [CT-07_remover-item-e-cupom-ui.txt](../evidencias/CT-07_remover-item-e-cupom-ui.txt) | Passou |
-| CT-08 | [CT-08_frete-limite-200-ui.jpg](../evidencias/CT-08_frete-limite-200-ui.jpg) | **Falhou** (BUG-001) |
-| CT-08 a CT-11 e CT-24 | [CT-08_09_10_11_24_ui-vs-api.txt](../evidencias/CT-08_09_10_11_24_ui-vs-api.txt) | CT-08 e CT-09 falharam, CT-10, CT-11 e CT-24 passaram |
-| CT-12 | [CT-12_limite-5-unidades-ui.txt](../evidencias/CT-12_limite-5-unidades-ui.txt) | Passou |
-| CT-13 | [CT-13_persistencia-ui.txt](../evidencias/CT-13_persistencia-ui.txt) | Passou |
-| CT-14 e CT-15 | [CT-14_15_checkout-ui.txt](../evidencias/CT-14_15_checkout-ui.txt) | Passou |
-| CT-16 | [CT-16_responsividade-e-acessibilidade.txt](../evidencias/CT-16_responsividade-e-acessibilidade.txt) e [print](../evidencias/CT-16_carrinho-mobile-375.jpg) | Passou |
-| CT-17 | `CT-17_*.txt` | Passou |
-| CT-18 | [CT-18_calcular-bemvindo10.txt](../evidencias/CT-18_calcular-bemvindo10.txt) | Passou |
-| CT-19 | `CT-19_*.txt` | Passou |
-| CT-20 | `CT-20_*.txt` | **Falhou** (BUG-001) |
-| CT-21 | `CT-21_*.txt` | **Falhou** (BUG-002) |
-| CT-22 | `CT-22_*.txt` | Passou |
-| CT-23 | `CT-23_*.txt` | Passou |
-| AUTO | [AUTO_execucao-playwright.txt](../evidencias/AUTO_execucao-playwright.txt) | 5 testes passando, 1 deles `test.fail` do BUG-001 |
-| SE-01 | [SE-01_exploratorio-cupom-e-frete.txt](../evidencias/SE-01_exploratorio-cupom-e-frete.txt) | BUG-001 |
-| SE-02 | [SE-02_api-exploratorio.txt](../evidencias/SE-02_api-exploratorio.txt) | BUG-002 |
+| CT-01 | [CT-01_aplicar-bemvindo10-ui.png](../evidencias/CT-01_aplicar-bemvindo10-ui.png) | Passou |
+| CT-02 | [CT-02_caixa-e-espacos-ui.png](../evidencias/CT-02_caixa-e-espacos-ui.png) | Passou |
+| CT-03 | [CT-03_cupom-invalido-expirado-ui.png](../evidencias/CT-03_cupom-invalido-expirado-ui.png) | Passou |
+| CT-04 | [CT-04_cupom-unico-e-casos-de-borda-ui.png](../evidencias/CT-04_cupom-unico-e-casos-de-borda-ui.png) | Passou |
+| CT-05 | [CT-05_remover-item-e-cupom-ui.png](../evidencias/CT-05_remover-item-e-cupom-ui.png) | Passou |
+| CT-06 | [CT-06_frete-limite-ui-vs-api.png](../evidencias/CT-06_frete-limite-ui-vs-api.png) | **Falhou** (BUG-001) |
+| CT-07 | [CT-07_cupom-e-frete-ui-vs-api.png](../evidencias/CT-07_cupom-e-frete-ui-vs-api.png) | **Falhou** (BUG-001) |
+| CT-08 | [CT-08_limite-5-unidades-ui.png](../evidencias/CT-08_limite-5-unidades-ui.png) | Passou |
+| CT-09 | [CT-09_persistencia-ui.png](../evidencias/CT-09_persistencia-ui.png) | Passou |
+| CT-10 | [CT-10_checkout-ui.png](../evidencias/CT-10_checkout-ui.png) | Passou |
+| CT-11 | [CT-11_validacao-checkout-ui.png](../evidencias/CT-11_validacao-checkout-ui.png) | Passou |
+| CT-12 | [CT-12_responsividade-e-acessibilidade.png](../evidencias/CT-12_responsividade-e-acessibilidade.png) | Passou |
+| CT-13 | [CT-13_produtos-lista.png](../evidencias/CT-13_produtos-lista.png) | Passou |
+| CT-14 | [CT-14_calcular-bemvindo10.png](../evidencias/CT-14_calcular-bemvindo10.png) | Passou |
+| CT-15 | [CT-15_calcular-cupom-expirado.png](../evidencias/CT-15_calcular-cupom-expirado.png) | Passou |
+| CT-16 | [CT-16_calcular-200-00.png](../evidencias/CT-16_calcular-200-00.png) | **Falhou** (BUG-001) |
+| CT-17 | [CT-17_quantidade-6.png](../evidencias/CT-17_quantidade-6.png) | **Falhou** (BUG-002) |
+| CT-18 | [CT-18_pedido-bemvindo10.png](../evidencias/CT-18_pedido-bemvindo10.png) | Passou |
+| CT-19 | [CT-19_nome-sem-sobrenome.png](../evidencias/CT-19_nome-sem-sobrenome.png) | Passou |
+| CT-20 | [CT-20_consistencia-ui-vs-api.png](../evidencias/CT-20_consistencia-ui-vs-api.png) | Passou |
 
 ## Limitações das evidências
 
-- Os testes de UI foram feitos no navegador embutido do app (Chromium), com preparo de estado via `sessionStorage` para montar carrinhos rapidamente. O cupom, os botões e o checkout foram acionados pela interface.
+- Os testes de UI foram feitos no Google Chrome 153. Uma rodada inicial no Chromium embutido do app teve os mesmos resultados.
+- Os números de pedido (VZ-...) mudam a cada execução, pois são gerados pela loja.
 - Poucos prints, e sem gravação de vídeo.

@@ -3,6 +3,10 @@ import { defineConfig, devices } from '@playwright/test';
 const baseURL =
   process.env.BASE_URL ?? 'https://verzel-store.qa-test-verzel-store.workers.dev';
 
+// Navegador da UI: Google Chrome instalado na máquina (canal "chrome").
+// Para usar o Chromium baixado pelo Playwright: PW_BROWSER=chromium npm test
+const channel = process.env.PW_BROWSER === 'chromium' ? undefined : 'chrome';
+
 // Ambiente compartilhado: execução leve, sem paralelismo agressivo.
 export default defineConfig({
   testDir: './tests',
@@ -22,8 +26,7 @@ export default defineConfig({
     {
       name: 'ui',
       testMatch: /.*\.ui\.spec\.ts/,
-      use: {
-    testIdAttribute: 'data-valor', ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'], channel },
     },
     {
       name: 'api',

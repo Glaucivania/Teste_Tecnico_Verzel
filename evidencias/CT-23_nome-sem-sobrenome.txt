@@ -1,6 +1,0 @@
-# 2026-10-06T15:31:19Z
-POST /api/pedidos
-Body: {"cliente":{"nome":"Maria","email":"maria@exemplo.com","cep":"01310100"},"itens":[{"produtoId":"P005","quantidade":1}]}
----
-{"erro":{"codigo":"DADOS_INVALIDOS","mensagem":"Existem campos inválidos no pedido.","campos":[{"campo":"cliente.nome","mensagem":"Informe nome e sobrenome."}]}}
-HTTP 422

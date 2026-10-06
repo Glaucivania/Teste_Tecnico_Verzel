@@ -1,6 +1,0 @@
-# 2026-10-06T15:31:19Z
-POST /api/pedidos
-Body: {"cliente":{"nome":"Maria Silva","email":"maria@exemplo.com","cep":"01310-100"},"itens":[{"produtoId":"P005","quantidade":1}],"cupom":"VERAO2026"}
----
-{"erro":{"codigo":"CUPOM_EXPIRADO","mensagem":"Cupom expirado.","campo":"cupom"}}
-HTTP 422

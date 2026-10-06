@@ -1,5 +1,0 @@
-# 2026-10-06T15:31:02Z
-GET /api/produtos/P999
----
-{"erro":{"codigo":"PRODUTO_NAO_ENCONTRADO","mensagem":"Produto P999 não encontrado."}}
-HTTP 404

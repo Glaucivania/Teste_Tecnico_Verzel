@@ -2,7 +2,7 @@
 
 Validação de QA da entrega **VZS-142 (v2.3.0): cupom de desconto e frete grátis** da Verzel Store, uma loja fictícia usada como ambiente de teste.
 
-> **Resumo em 30 segundos:** 24 cenários em Gherkin, 20 passaram e 4 falharam, por causa de **2 bugs** ([BUG-001](bugs/BUG-001.md), alta: frete cobrado com subtotal de R$ 200,00, e [BUG-002](bugs/BUG-002.md), média: API aceita mais de 5 unidades). A automação Playwright cobre 3 cenários e roda verde. Histórico em [CHANGELOG](CHANGELOG.md).
+> **Resumo em 30 segundos:** 20 cenários em Gherkin, 16 passaram e 4 falharam, por causa de **2 bugs** ([BUG-001](bugs/BUG-001.md), alta: frete cobrado com subtotal de R$ 200,00, e [BUG-002](bugs/BUG-002.md), média: API aceita mais de 5 unidades). A automação Playwright cobre 3 cenários e roda verde. Histórico em [CHANGELOG](CHANGELOG.md).
 
 ## Visão geral
 
@@ -29,9 +29,9 @@ A entrega adiciona à loja a aplicação de cupons no carrinho e a regra de fret
 
 | Métrica | Valor |
 |---|---|
-| Cenários planejados e executados | 24 |
-| Passou | 20 |
-| Falhou | 4 (CT-08, CT-09, CT-20 e CT-21) |
+| Cenários planejados e executados | 20 |
+| Passou | 16 |
+| Falhou | 4 (CT-06, CT-07, CT-16 e CT-17) |
 | Bloqueado | 0 |
 | Bugs | 2 (1 alta, 1 média) |
 | Testes automatizados | 5 testes em 3 cenários, suíte verde |
@@ -45,7 +45,7 @@ Cada item do desafio e o lugar onde ele está:
 | # | Entrega | Onde encontrar | Estado |
 |---|---|---|---|
 | 1 | Cenários de teste (Gherkin) | [`cenarios/`](cenarios/) e [`docs/matriz-rastreabilidade.md`](docs/matriz-rastreabilidade.md) | Concluído |
-| 2 | Execução (manual e exploratória) | [`execucao/resultados.md`](execucao/resultados.md) | Concluído (20 passaram, 4 falharam) |
+| 2 | Execução (manual e exploratória) | [`execucao/resultados.md`](execucao/resultados.md) | Concluído (16 passaram, 4 falharam) |
 | 3 | Report de bugs | [`bugs/`](bugs/) | Concluído (2 bugs) |
 | 4 | Documento de evidências | [`docs/evidencias.md`](docs/evidencias.md) e [`evidencias/`](evidencias/) | Concluído |
 | 5 | Automação com Playwright | [`automacao/`](automacao/) | Concluído (3 cenários, 5 testes) |
@@ -69,11 +69,11 @@ Documentos de apoio:
 │   ├── estrategia-de-testes.md
 │   ├── matriz-rastreabilidade.md
 │   └── evidencias.md
-├── cenarios/                   arquivos .feature (Gherkin, em português)
+├── cenarios/                   um .feature por cenário (CT-01 a CT-20), em subpastas por tema
 ├── execucao/
 │   └── resultados.md           resultado de cada cenário e sessões exploratórias
 ├── bugs/                       um arquivo por bug (BUG-001.md ...), resumo e modelo
-├── evidencias/                 saídas de curl, textos da UI e prints, nomeados por ID (CT-08_...)
+├── evidencias/                 uma imagem de evidência por cenário (capturas da UI e requisição com resposta da API), nomeadas por ID (CT-06_...)
 └── automacao/                  Playwright + TypeScript
     ├── playwright.config.ts
     ├── package.json
@@ -84,17 +84,18 @@ Documentos de apoio:
 
 ## Estratégia resumida
 
-- **24 cenários** priorizados (P1 a P3), cobrindo cupom, frete grátis, quantidade máxima, checkout, API e consistência entre UI e API.
+- **20 cenários** priorizados (P1 a P3), cobrindo cupom, frete grátis, quantidade máxima, checkout, API e consistência entre UI e API.
 - **Técnicas:** partição de equivalência, análise de valor limite (subtotal 199,90, 200,00 e 229,90, já que o catálogo não permite 199,99 e 200,01; quantidade 0, 1, 5 e 6), tabela de decisão e transição de estados.
 - **Gherkin em português**, com Esquema do Cenário para casos de limite, e tags `@smoke`, `@regressao`, `@api`, `@ui`, `@automatizado` e `@P1` a `@P3`.
-- **Execução:** manual guiada pelos cenários, 2 sessões exploratórias com charter e testes de API com `curl`, com poucas requisições.
-- **Automação:** 3 cenários de maior valor para o negócio, escolhidos por cobrirem o coração da entrega: **CT-01** (aplicar cupom válido, UI), **CT-08** (limite do frete grátis, UI, 3 valores) e **CT-18** (cálculo da API com cupom e frete). Bugs conhecidos ficam como `test.fail` com o ID do bug.
+- **Execução:** manual guiada pelos cenários, 2 sessões exploratórias com charter e testes de API no Postman, com poucas requisições.
+- **Automação:** 3 cenários de maior valor para o negócio, escolhidos por cobrirem o coração da entrega: **CT-01** (aplicar cupom válido, UI), **CT-06** (limite do frete grátis, UI, 3 valores) e **CT-14** (cálculo da API com cupom e frete). Bugs conhecidos ficam como `test.fail` com o ID do bug.
 
 ## Como rodar a automação
 
 **Pré-requisitos**
 
 - Node.js 18 ou superior e npm
+- Google Chrome instalado (a suíte de UI usa o Chrome pelo canal `chrome` do Playwright)
 - Acesso à internet (os testes rodam contra a loja pública)
 
 **Instalação e execução** (a partir da raiz do repositório)
@@ -102,7 +103,6 @@ Documentos de apoio:
 ```bash
 cd automacao
 npm install
-npx playwright install chromium
 npm test
 ```
 
@@ -111,6 +111,8 @@ npm test
 ```bash
 npm run report
 ```
+
+Para rodar a UI no Chromium baixado pelo Playwright em vez do Chrome, instale-o com `npx playwright install chromium` e use `PW_BROWSER=chromium npm test` (no PowerShell: `$env:PW_BROWSER="chromium"; npm test`).
 
 Outros comandos úteis:
 
@@ -124,18 +126,18 @@ npm run test:headed  # com o navegador visível
 
 | Teste | Cenário | Camada | Resultado esperado |
 |---|---|---|---|
-| CT-01 aplicar BEMVINDO10 dá 10% sobre o subtotal | CT-01 | UI | Passa |
-| CT-08 frete abaixo do limite (R$ 199,90) | CT-08 | UI | Passa |
-| CT-08 frete exatamente no limite (R$ 200,00) | CT-08 | UI | **Marcado `test.fail` (BUG-001)** |
-| CT-08 frete acima do limite (R$ 229,90) | CT-08 | UI | Passa |
-| CT-18 calcular carrinho com BEMVINDO10 | CT-18 | API | Passa |
+| CT-01 BEMVINDO10 dá 10% sobre o subtotal e não incide no frete | CT-01 | UI | Passa |
+| CT-06 frete abaixo do limite (R$ 199,90) | CT-06 | UI | Passa |
+| CT-06 frete exatamente no limite (R$ 200,00) | CT-06 | UI | **Marcado `test.fail` (BUG-001)** |
+| CT-06 frete acima do limite (R$ 229,90) | CT-06 | UI | Passa |
+| CT-14 calcular carrinho com BEMVINDO10 | CT-14 | API | Passa |
 
 A suíte fica **verde** (`5 passed`). O teste do limite de R$ 200,00 falha de propósito por causa do [BUG-001](bugs/BUG-001.md). Quando o bug for corrigido, o Playwright vai acusar esse teste como "esperava falhar, mas passou", sinal para remover o `test.fail`.
 
 **Como a automação é organizada** (em [`automacao/`](automacao/))
 
 - `pages/`: Page Objects enxutos (`ProductsPage`, `CartPage`).
-- `tests/`: `*.ui.spec.ts` (projeto `ui`, Chromium) e `*.api.spec.ts` (projeto `api`, `request` do Playwright).
+- `tests/`: `*.ui.spec.ts` (projeto `ui`, Google Chrome) e `*.api.spec.ts` (projeto `api`, `request` do Playwright).
 - `support/money.ts`: formatação de valores em reais para as asserções.
 - Seletores: `getByRole`, `getByTestId` (a loja expõe `data-valor` nos valores do resumo, configurado como `testIdAttribute`) e `getByText`. Sem `sleep` fixo, só asserções com espera automática.
 - Independência: cada teste roda em um contexto novo, com carrinho próprio. Nos testes de frete, o carrinho é preparado no `sessionStorage` antes de a página carregar, para montar o subtotal rápido. O CT-01 usa o fluxo completo (vitrine, adicionar, carrinho, cupom).
@@ -159,10 +161,10 @@ A suíte fica **verde** (`5 passed`). O teste do limite de R$ 200,00 falha de pr
 
 - O trabalho é uma amostra priorizada, não uma cobertura exaustiva. Navegadores e dispositivos são testados de forma pontual.
 - Acessibilidade e responsividade têm checagem básica, sem ferramentas automatizadas completas.
-- A automação cobre só 3 cenários, por decisão de priorizar o que mais importa. Os demais 21 foram executados manualmente.
+- A automação cobre só 3 cenários, por decisão de priorizar o que mais importa. Os demais 17 foram executados manualmente.
 - Os testes dependem da disponibilidade da loja pública e de comportamento estável dela.
-- Os testes de UI manuais foram feitos no Chromium embutido do app, não em vários navegadores.
-- As 2 sessões exploratórias foram mais curtas que os 30 minutos planejados e não foram cronometradas. A UI foi testada no Chromium embutido do app, com evidências em texto (DOM) e poucos prints, sem gravação de vídeo.
+- Os testes de UI manuais foram feitos no Google Chrome 153, com uma rodada inicial no Chromium embutido do app, de mesmo resultado. Não houve execução em outros navegadores, como Firefox, Safari e Edge.
+- As 2 sessões exploratórias foram mais curtas que os 30 minutos planejados e não foram cronometradas, e foram feitas no Chromium embutido do app. A UI dos cenários foi testada no Chrome, com evidências em texto (DOM) e poucos prints, sem gravação de vídeo.
 - Não foram feitos testes de carga, estresse ou segurança, por determinação do desafio.
 
 ## Fluxo de trabalho (Git)

@@ -44,8 +44,8 @@ const cases: Case[] = [
 
 test.describe('Frete grátis a partir de R$ 200,00', () => {
   for (const c of cases) {
-    // CT-08 | CA06 e CA07 | @smoke @regressao @ui @P1
-    test(`CT-08 frete ${c.name}`, async ({ page }) => {
+    // CT-06 | CA06 e CA07 | @smoke @regressao @ui @P1
+    test(`CT-06 frete ${c.name}`, async ({ page }) => {
       if (c.bug) test.fail(true, c.bug);
 
       const cart = new CartPage(page);

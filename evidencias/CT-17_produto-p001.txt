@@ -1,5 +1,0 @@
-# 2026-10-06T15:31:01Z
-GET /api/produtos/P001
----
-{"id":"P001","nome":"Camiseta Essencial","descricao":"Algodão penteado e corte reto.","categoria":"Vestuário","preco":59.9}
-HTTP 200
