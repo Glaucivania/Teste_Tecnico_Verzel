@@ -1,4 +1,0 @@
-SE-01 Cupom e frete grátis (UI) | 2026-10-06
-Charter: explorar combinações de itens, cupom e remoção para achar inconsistências de desconto e frete.
-Achados: BUG-001 (frete cobrado no subtotal exato de R$ 200,00, com mensagem "Faltam R$ 0,00 para o frete grátis."). Propaga para o pedido confirmado.
-Sem divergência: remoção de itens e do cupom, "Esvaziar carrinho" limpa o cupom, persistência na aba, validação de checkout.

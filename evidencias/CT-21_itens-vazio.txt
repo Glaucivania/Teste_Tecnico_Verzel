@@ -1,6 +1,0 @@
-# 2026-10-06T15:31:16Z
-POST /api/carrinho/calcular
-Body: {"itens":[]}
----
-{"erro":{"codigo":"ITENS_OBRIGATORIOS","mensagem":"Informe ao menos um item.","campo":"itens"}}
-HTTP 422

@@ -1,6 +1,0 @@
-# 2026-10-06T15:31:16Z
-POST /api/carrinho/calcular
-Body: {"itens":[{"produtoId":"P001","quantidade":1.5}]}
----
-{"erro":{"codigo":"QUANTIDADE_INVALIDA","mensagem":"A quantidade deve ser um número inteiro maior ou igual a 1.","campo":"itens[0].quantidade"}}
-HTTP 422
