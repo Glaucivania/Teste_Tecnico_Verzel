@@ -15,10 +15,12 @@ Validar a entrega VZS-142 (cupom de desconto e frete grátis) na UI e na API, e 
 | Técnica | Aplicação |
 |---|---|
 | Partição de equivalência | Cupom válido, inválido, expirado e vazio. |
-| Valor limite | Subtotal 199,99, 200,00 e 200,01. Quantidade 0, 1, 5 e 6. |
+| Valor limite | Subtotal 199,90, 200,00 e 229,90 (veja a nota abaixo). Quantidade 0, 1, 5 e 6. |
 | Tabela de decisão | Cupom x faixa de frete (total e frete esperados). |
 | Transição de estados | Carrinho vazio, com itens, com cupom e após remoção. |
 | Exploratório | 2 sessões de 30 minutos com charter. |
+
+**Nota sobre os valores limite:** os preços do catálogo terminam em 0,90 ou 0,00, então os subtotais de R$ 199,99 e R$ 200,01 não podem ser montados na loja nem na API. Os valores mais próximos do limite são **R$ 199,90** (1 Boné + 3 Garrafas, abaixo), **R$ 200,00** (4 Garrafas, exato) e **R$ 229,90** (1 Jaqueta, acima). O arredondamento também não aparece com 10%, pois todo subtotal é múltiplo de R$ 0,10 e o desconto fecha em centavos exatos. Por isso o CT-11 verifica casas decimais e ponto flutuante (por exemplo 3 x 59,90 = 179,70).
 
 ## Priorização
 
