@@ -1,8 +1,8 @@
 # Resultados da execução
 
 **Ambiente:** https://verzel-store.qa-test-verzel-store.workers.dev (v2.3.0)
-**Data:** 2026-10-06 | **Executor:** QA
-**Método:** execução manual guiada pelos cenários em [`../cenarios/`](../cenarios/). A interface foi exercitada no Google Chrome 153 (Windows 11), pela extensão Claude in Chrome e por um script de captura em Playwright, e a API pelo Postman, com poucas requisições. Uma rodada inicial no Chromium embutido do app Claude teve os mesmos resultados.
+**Data:** 2026-10-06 | **Executor:** Glaucivania Gomes
+**Método:** execução manual guiada pelos cenários em [`../cenarios/`](../cenarios/). A interface foi exercitada no Google Chrome 153 (Windows 11), por um script de captura em Playwright, e a API pelo Postman, com poucas requisições.
 
 ## Resumo
 
@@ -49,10 +49,6 @@ Bugs encontrados: [BUG-001](../bugs/BUG-001.md) (frete cobrado no subtotal de R$
 - **CT-08:** a UI não permite chegar a 6 unidades, então o valor 6 foi coberto pela API no CT-17 (BUG-002).
 - **CT-20:** a UI e a API estão consistentes entre si em todos os carrinhos testados, inclusive no erro do limite de R$ 200,00.
 - **Evidências de API:** a coluna cita um arquivo por cenário. Cada cenário tem uma única imagem de evidência, em [`../evidencias/`](../evidencias/).
-
-## Rodadas no Google Chrome
-
-Em 2026-10-06, os cenários de UI (CT-01 a CT-12 e CT-20) foram reexecutados no **Google Chrome 153** e os resultados foram os mesmos da rodada inicial no Chromium embutido do app Claude: 16 passaram e 4 falharam, e o BUG-001 foi reproduzido na UI e na API.
 
 Cada cenário tem **uma imagem** de evidência: capturas do Google Chrome 153 para a UI e capturas do Postman para a API (com a aba Test Results).
 

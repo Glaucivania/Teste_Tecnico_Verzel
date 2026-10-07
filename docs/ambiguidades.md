@@ -1,6 +1,6 @@
 # Ambiguidades e interpretações
 
-Fonte: [documentação da entrega VZS-142](https://verzel-store.qa-test-verzel-store.workers.dev/documentacao). Onde o texto não define o comportamento, registro a interpretação adotada e sigo em frente. Cada item será confirmado na loja durante a execução.
+Fonte: [documentação da entrega VZS-142](https://verzel-store.qa-test-verzel-store.workers.dev/documentacao).
 
 ## Resumo das regras
 
