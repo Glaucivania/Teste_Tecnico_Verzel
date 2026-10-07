@@ -162,7 +162,6 @@ A suíte fica **verde** (`5 passed`). O teste do limite de R$ 200,00 falha de pr
 - A automação cobre só 3 cenários, por decisão de priorizar o que mais importa. Os demais 17 foram executados manualmente.
 - Os testes dependem da disponibilidade da loja pública e de comportamento estável dela.
 - Os testes de UI manuais foram feitos no Google Chrome 153.
-- As 2 sessões exploratórias foram mais curtas que os 30 minutos planejados e não foram cronometradas, e foram feitas no Chromium embutido do app. A UI dos cenários foi testada no Chrome, com evidências em texto (DOM).
 - Não foram feitos testes de carga, estresse ou segurança, por determinação do desafio.
 
 ## Fluxo de trabalho (Git)
