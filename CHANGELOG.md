@@ -9,7 +9,6 @@ Plano de versões: cada fase concluída gera uma versão e `1.0.0` marca o envio
 ### Adicionado
 - Workspace do Postman versionado em `postman/` e `.postman/`.
 - Coleção do Postman dos testes de API (CT-13 a CT-19), com 26 requisições e testes. Executada com o Newman: 57 asserções, 6 falhas, todas do BUG-001 e do BUG-002.
-- Evidências de API (CT-13 a CT-19) substituídas por capturas de tela do Postman, com a aba Test Results.
 - Pasta CT-20 na coleção do Postman, com 4 requisições que comparam a API com o resumo da tela (12 asserções, nenhuma falha).
 - Cenários Gherkin organizados em um arquivo por cenário (CT-01 a CT-20), em subpastas numeradas por tema, com o passo a passo manual de cada teste e índice em `cenarios/README.md`.
 - Evidências em imagem, uma por cenário, sem texto sobreposto.

@@ -1,6 +1,6 @@
 # Bugs
 
-## Resumo executivo
+## Resumo 
 
 Execução de 06/10/2026 na v2.3.0: 20 cenários, 16 passaram e 4 falharam. As 4 falhas vêm de **2 bugs**, ambos em regras de negócio da entrega. Cupom, caixa e espaços, mensagens, remoção de itens, checkout e API de erros se comportam como a documentação.
 

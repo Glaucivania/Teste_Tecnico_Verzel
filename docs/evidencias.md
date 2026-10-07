@@ -49,6 +49,4 @@ Todos em [`../evidencias/`](../evidencias/).
 
 ## Limitações das evidências
 
-- Os testes de UI foram feitos no Google Chrome 153. Uma rodada inicial no Chromium embutido do app teve os mesmos resultados.
 - Os números de pedido (VZ-...) mudam a cada execução, pois são gerados pela loja.
-- Poucos prints, e sem gravação de vídeo.
